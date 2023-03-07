@@ -35,6 +35,10 @@
   @include tabletS {
     flex-direction: column;
     width: 60%;
+<<<<<<< HEAD
+=======
+    gap: 20px;
+>>>>>>> 1e5fdf781ceb73916ae1afda8ab36c105d0a7ae8
   }
 
   @include mobileL {
