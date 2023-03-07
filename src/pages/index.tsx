@@ -1,5 +1,25 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.scss';
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from './Home.module.scss';
+
+const links = [
+  {
+    name: 'raid calculator',
+    path: '/raid-calculator',
+    image: '/raid_thumbnail.jpg',
+  },
+  {
+    name: 'wipe progression',
+    path: '/wipe-progression',
+    image: '/wipe_progression_thumbnail.png',
+  },
+  {
+    name: 'coming soon',
+    path: '/coming-soon',
+    image: '/servers_thumbnail.jpeg',
+  },
+];
 
 export default function Home() {
   return (
@@ -17,9 +37,24 @@ export default function Home() {
         <h1 className={styles.name}>
           <span>rust</span> buddy
         </h1>
-        <p style={{ textAlign: 'center', fontSize: '2rem' }}>
-          site under construction
-        </p>
+        <div className={styles.linksWrapper}>
+          {links.map((link) => (
+            <Link key={link.name} href={link.path} className={styles.link}>
+              <div className={styles.imageOpacity}></div>
+              <Image
+                src={link.image}
+                alt={link.name}
+                fill
+                className={styles.linkImage}
+              />
+              <p className={styles.linkName}>
+                {link.name.split(' ')[0]}
+                <br />
+                {link.name.split(' ')[1]}
+              </p>
+            </Link>
+          ))}
+        </div>
       </main>
     </>
   );
