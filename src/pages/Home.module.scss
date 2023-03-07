@@ -1,3 +1,5 @@
+@use '../styles/mixins' as *;
+
 .main {
   width: 100%;
   height: 100vh;
@@ -13,6 +15,10 @@
   & span {
     color: var(--red);
   }
+
+  @include mobile {
+    font-size: 3.5rem;
+  }
 }
 
 .linksWrapper {
@@ -20,6 +26,20 @@
   justify-content: space-between;
   width: 80%;
   margin: 0 auto;
+
+  @include tablet {
+    width: 90%;
+  }
+
+  @include tabletS {
+    flex-direction: column;
+    width: 60%;
+    gap: 20px;
+  }
+
+  @include mobileL {
+    width: 90%;
+  }
 }
 
 .link {
@@ -32,6 +52,19 @@
 
   &:hover {
     border-color: var(--red);
+  }
+
+  @include tablet {
+    width: 250px;
+  }
+
+  @include tabletS {
+    width: 100%;
+    height: 200px;
+  }
+
+  @include mobile {
+    height: 150px;
   }
 }
 
@@ -64,4 +97,8 @@
   display: grid;
   align-content: center;
   text-align: center;
+
+  @include tablet {
+    font-size: 40px;
+  }
 }
