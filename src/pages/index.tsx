@@ -1,5 +1,8 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.scss';
+import { Bebas_Neue } from 'next/font/google';
+
+const bebasNeue = Bebas_Neue({ weight: '400', subsets: ['latin'] });
 
 export default function Home() {
   return (
@@ -14,11 +17,17 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles.main}>
-        <h1 className={styles.name}>
+        <h1 className={`${bebasNeue.className} ${styles.name}`}>
           <span>rust</span> buddy
         </h1>
-        <p style={{ textAlign: 'center', fontSize: '2rem' }}>
-          site under construction
+        <p
+          style={{
+            textAlign: 'center',
+            fontSize: '1rem',
+            color: 'var(--light-font)',
+          }}
+        >
+          SITE UNDER CONSTRUCTION
         </p>
       </main>
     </>
