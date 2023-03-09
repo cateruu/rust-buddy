@@ -1,8 +1,25 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.scss';
-import { Bebas_Neue } from 'next/font/google';
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from './Home.module.scss';
 
-const bebasNeue = Bebas_Neue({ weight: '400', subsets: ['latin'] });
+const links = [
+  {
+    name: 'raid calculator',
+    path: '/raid-calculator',
+    image: '/raid_thumbnail.jpg',
+  },
+  {
+    name: 'wipe progression',
+    path: '/wipe-progression',
+    image: '/wipe_progression_thumbnail.png',
+  },
+  {
+    name: 'coming soon',
+    path: '/coming-soon',
+    image: '/servers_thumbnail.jpeg',
+  },
+];
 
 export default function Home() {
   return (
@@ -17,18 +34,27 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles.main}>
-        <h1 className={`${bebasNeue.className} ${styles.name}`}>
+        <h1 className={styles.name}>
           <span>rust</span> buddy
         </h1>
-        <p
-          style={{
-            textAlign: 'center',
-            fontSize: '1rem',
-            color: 'var(--light-font)',
-          }}
-        >
-          SITE UNDER CONSTRUCTION
-        </p>
+        <div className={styles.linksWrapper}>
+          {links.map((link) => (
+            <Link key={link.name} href={link.path} className={styles.link}>
+              <div className={styles.imageOpacity}></div>
+              <Image
+                src={link.image}
+                alt={link.name}
+                fill
+                className={styles.linkImage}
+              />
+              <p className={styles.linkName}>
+                {link.name.split(' ')[0]}
+                <br />
+                {link.name.split(' ')[1]}
+              </p>
+            </Link>
+          ))}
+        </div>
       </main>
     </>
   );
