@@ -1,3 +1,4 @@
+import CalculatorForm from '../../components/RaidCalculator/CalculatorForm/CalculatorForm';
 import styles from './RaidCalculator.module.scss';
 
 const RaidCalculator = () => {
@@ -7,6 +8,7 @@ const RaidCalculator = () => {
         <h1>Raid Calculator</h1>
         <p>Advanced rust raid calculator.</p>
       </div>
+      <CalculatorForm />
     </div>
   );
 };

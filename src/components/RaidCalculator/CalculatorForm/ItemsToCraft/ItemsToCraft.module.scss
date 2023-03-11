@@ -1,0 +1,24 @@
+.items {
+  display: flex;
+  column-gap: 1em;
+}
+
+.item {
+  position: relative;
+  background: var(--dark-bg);
+  width: 6rem;
+  height: 6rem;
+
+  & img {
+    object-fit: contain;
+    padding: 1em;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.selected {
+  outline: 1px solid var(--light-font);
+}
