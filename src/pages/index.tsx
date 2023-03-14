@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Home.module.scss';
+import { Bebas_Neue } from 'next/font/google';
 
 const links = [
   {
@@ -21,6 +22,8 @@ const links = [
   },
 ];
 
+const bebasNeue = Bebas_Neue({ weight: '400', subsets: ['latin'] });
+
 export default function Home() {
   return (
     <>
@@ -33,7 +36,7 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className={styles.main}>
+      <main className={`${styles.main} ${bebasNeue.className}`}>
         <h1 className={styles.name}>
           <span>rust</span> buddy
         </h1>
