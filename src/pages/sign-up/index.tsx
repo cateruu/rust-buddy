@@ -30,8 +30,23 @@ const SignUpPage = () => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     validateOnBlur: true,
-    onSubmit: () => {
-      console.log('submit');
+    onSubmit: async () => {
+      const { error } = await supabaseClient.auth.signUp({
+        email: values.email,
+        password: values.password,
+        options: {
+          data: {
+            name: values.username,
+          },
+        },
+      });
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      router.push('/sign-in');
     },
   });
 
@@ -39,28 +54,11 @@ const SignUpPage = () => {
 
   const router = useRouter();
 
-  const signUpUser = async (event: FormEvent) => {
-    event.preventDefault();
-
-    // const { error } = await supabaseClient.auth.signUp({
-    //   email: email,
-    //   password: password,
-    //   options: {
-    //     data: {
-    //       username: username,
-    //     },
-    //   },
-    // });
-
-    // if (error) {
-    //   console.error(error);
-    //   return;
-    // }
-
-    // router.push('/sign-in');
+  const handleGoogleSignUp = async () => {
+    await supabaseClient.auth.signInWithOAuth({
+      provider: 'google',
+    });
   };
-
-  console.log(errors);
 
   return (
     <>
@@ -124,6 +122,7 @@ const SignUpPage = () => {
         <button
           className={styles.button}
           style={{ backgroundColor: '#4c4946' }}
+          onClick={handleGoogleSignUp}
         >
           Sign In with Google
         </button>
