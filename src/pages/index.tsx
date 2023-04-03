@@ -22,6 +22,10 @@ const links = [
 ];
 
 export default function Home() {
+  const login = async () => {
+    const response = await fetch('/api/auth');
+  };
+
   return (
     <>
       <Head>
@@ -34,6 +38,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles.main}>
+        <button onClick={login}>Login</button>
         <h1 className={styles.name}>
           <span>rust</span> buddy
         </h1>
