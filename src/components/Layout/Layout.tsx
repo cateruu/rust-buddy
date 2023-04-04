@@ -1,8 +1,11 @@
 import React, { FC } from 'react';
-import { Bebas_Neue } from 'next/font/google';
 import styles from './Layout.module.scss';
+import { Poppins } from 'next/font/google';
 
-const bebasNeue = Bebas_Neue({ weight: '400', subsets: ['latin'] });
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+});
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +13,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className={`${bebasNeue.className} ${styles.main}`}>{children}</div>
+    <div className={`${poppins.className} ${styles.main}`}>{children}</div>
   );
 };
 

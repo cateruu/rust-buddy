@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  align-items: center;
+  background-color: var(--dark-bg);
+}
+
+.imageWrapper {
+  position: relative;
+  height: 44px;
+  width: 44px;
+}
+
+.name {
+  width: 200px;
+  padding: 0 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.button {
+  height: 44px;
+  width: 120px;
+  line-height: 44px;
+  text-align: center;
+  background-color: var(--secondary-bg);
+}
