@@ -1,0 +1,16 @@
+// Temporary
+.raid-calculator {
+  margin: auto;
+  width: 50rem;
+}
+
+.heading {
+  & h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  & p {
+    font-size: 1rem;
+    color: var(--dark-font);
+  }
+}
