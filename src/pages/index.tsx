@@ -2,6 +2,10 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Home.module.scss';
+import router, { NextAuthApiRequest } from '../lib/router';
+import { NextApiResponse } from 'next';
+import { SteamUser } from '../lib/passport';
+import Navbar from '../components/Layout/Navbar/Navbar';
 import { Bebas_Neue } from 'next/font/google';
 
 const links = [
@@ -24,7 +28,11 @@ const links = [
 
 const bebasNeue = Bebas_Neue({ weight: '400', subsets: ['latin'] });
 
-export default function Home() {
+interface Props {
+  user: SteamUser;
+}
+
+export default function Home({ user }: Props) {
   return (
     <>
       <Head>
@@ -36,13 +44,15 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className={`${styles.main} ${bebasNeue.className}`}>
-        <h1 className={styles.name}>
-          <span>rust</span> buddy
-        </h1>
+      <main className={styles.main}>
+        <Navbar user={user} />
         <div className={styles.linksWrapper}>
           {links.map((link) => (
-            <Link key={link.name} href={link.path} className={styles.link}>
+            <Link
+              key={link.name}
+              href={link.path}
+              className={`${styles.link} ${bebasNeue.className}`}
+            >
               <div className={styles.imageOpacity}></div>
               <Image
                 src={link.image}
@@ -62,3 +72,14 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = async ({
+  req,
+  res,
+}: {
+  req: NextAuthApiRequest;
+  res: NextApiResponse;
+}) => {
+  await router.run(req, res);
+  return { props: { user: req.user || null } };
+};

@@ -1,8 +1,6 @@
-import React from 'react';
-import { Poppins } from 'next/font/google';
+import React, { FC } from 'react';
 import styles from './Layout.module.scss';
-import { useRouter } from 'next/router';
-import Navbar from './Navbar/Navbar';
+import { Poppins } from 'next/font/google';
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
@@ -14,13 +12,8 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
-  const router = useRouter();
-
   return (
-    <div className={`${poppins.className} ${styles.main}`}>
-      {router.pathname !== '/' && <Navbar />}
-      {children}
-    </div>
+    <div className={`${poppins.className} ${styles.main}`}>{children}</div>
   );
 };
 
