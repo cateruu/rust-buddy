@@ -2,13 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Home.module.scss';
-import router, { NextAuthApiRequest } from '../lib/router';
-import { NextApiResponse } from 'next';
-import { SteamUser } from '../lib/passport';
-import Navbar from '../components/Layout/Navbar/Navbar';
 import { Bebas_Neue } from 'next/font/google';
-import { useUser } from '../hooks/useUser';
-import { useEffect } from 'react';
 
 const links = [
   {
@@ -30,17 +24,7 @@ const links = [
 
 const bebasNeue = Bebas_Neue({ weight: '400', subsets: ['latin'] });
 
-interface Props {
-  user: SteamUser;
-}
-
-export default function Home({ user }: Props) {
-  const { setUser } = useUser();
-
-  useEffect(() => {
-    setUser(user);
-  }, [setUser, user]);
-
+const Home = () => {
   return (
     <>
       <Head>
@@ -53,7 +37,6 @@ export default function Home({ user }: Props) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles.main}>
-        <Navbar />
         <div className={styles.linksWrapper}>
           {links.map((link) => (
             <Link
@@ -79,15 +62,6 @@ export default function Home({ user }: Props) {
       </main>
     </>
   );
-}
-
-export const getServerSideProps = async ({
-  req,
-  res,
-}: {
-  req: NextAuthApiRequest;
-  res: NextApiResponse;
-}) => {
-  await router.run(req, res);
-  return { props: { user: req.user || null } };
 };
+
+export default Home;
