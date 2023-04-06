@@ -41,7 +41,9 @@ const Navbar = () => {
       )}
 
       {user ? (
-        <UserInfo user={user} />
+        <div className={styles.userWrapper}>
+          <UserInfo />
+        </div>
       ) : (
         <Link href='/api/auth/login' className={styles.button}>
           Login

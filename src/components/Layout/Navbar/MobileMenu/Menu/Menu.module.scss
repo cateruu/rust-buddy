@@ -1,3 +1,5 @@
+@use '../../../../../styles/mixins' as *;
+
 .container {
   width: 100vw;
   height: 100vh;
@@ -5,6 +7,29 @@
   top: 0;
   left: 0;
   background-color: var(--main-bg);
-  opacity: 0.95;
+  opacity: 0.993;
   padding: 100px 22px 0 22px;
+  display: none;
+
+  @include tabletS {
+    display: block;
+  }
+}
+
+.button {
+  font-size: 14px;
+  font-weight: 500;
+  width: 120px;
+  height: 44px;
+  background-color: var(--red);
+  display: grid;
+  place-content: center;
+  transition: 0.15s;
+}
+
+.linksWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
 }

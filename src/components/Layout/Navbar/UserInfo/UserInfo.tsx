@@ -3,12 +3,11 @@ import styles from './UserInfo.module.scss';
 import { SteamUser } from '../../../../lib/passport';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useUser } from '../../../../hooks/useUser';
 
-interface Props {
-  user: SteamUser;
-}
+const UserInfo = () => {
+  const { user } = useUser();
 
-const UserInfo = ({ user }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper}>

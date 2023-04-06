@@ -1,3 +1,5 @@
+@use '../../../styles/mixins' as *;
+
 .header {
   width: 100%;
   height: 100px;
@@ -46,7 +48,13 @@
   place-content: center;
   transition: 0.15s;
 
-  &:hover {
-    background-color: var(--red);
+  @include tabletS {
+    display: none;
+  }
+}
+
+.userWrapper {
+  @include tabletS {
+    display: none;
   }
 }
