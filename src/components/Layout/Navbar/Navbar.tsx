@@ -5,15 +5,14 @@ import React from 'react';
 import styles from './Navbar.module.scss';
 import { SteamUser } from '../../../lib/passport';
 import UserInfo from './UserInfo/UserInfo';
+import MobileMenu from './MobileMenu/MobileMenu';
+import { useUser } from '../../../hooks/useUser';
 
 const bebasNeue = Bebas_Neue({ weight: '400', subsets: ['latin'] });
 
-interface Props {
-  user: SteamUser;
-}
-
-const Navbar = ({ user }: Props) => {
+const Navbar = () => {
   const router = useRouter();
+  const { user } = useUser();
 
   return (
     <header className={styles.header}>
@@ -48,6 +47,7 @@ const Navbar = ({ user }: Props) => {
           Login
         </Link>
       )}
+      <MobileMenu />
     </header>
   );
 };

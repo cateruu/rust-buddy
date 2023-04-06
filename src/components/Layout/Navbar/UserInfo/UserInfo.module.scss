@@ -1,7 +1,13 @@
+@use '../../../../styles/mixins' as *;
+
 .container {
   display: flex;
   align-items: center;
   background-color: var(--dark-bg);
+
+  @include tabletS {
+    display: none;
+  }
 }
 
 .imageWrapper {

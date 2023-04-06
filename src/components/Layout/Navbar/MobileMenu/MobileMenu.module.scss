@@ -1,0 +1,53 @@
+@use '../../../../styles/mixins' as *;
+
+.hamburgerWrapper {
+  display: none;
+  height: 100%;
+  align-items: center;
+  cursor: pointer;
+
+  @include tabletS {
+    display: flex;
+  }
+}
+
+.hamburger {
+  width: 20px;
+  height: 2px;
+  border-radius: 5px;
+  background-color: var(--white);
+  position: relative;
+
+  &.menuOpen {
+    height: 0;
+  }
+
+  &::after,
+  &::before {
+    content: '';
+    width: 20px;
+    height: 2px;
+    border-radius: 5px;
+    background-color: var(--white);
+    position: absolute;
+    transition: 0.15s;
+  }
+
+  &::after {
+    top: 5px;
+  }
+
+  &.menuOpen::after {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  &::before {
+    top: -5px;
+  }
+
+  &.menuOpen::before {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+}

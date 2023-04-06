@@ -5,10 +5,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 10;
 }
 
 .name {
   font-size: 40px;
+  z-index: 11;
 
   & span {
     color: var(--red);
@@ -39,7 +41,7 @@
   font-weight: 500;
   width: 120px;
   height: 44px;
-  background-color: var(--secondary-bg);
+  background-color: var(--red);
   display: grid;
   place-content: center;
   transition: 0.15s;
