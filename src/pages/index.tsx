@@ -7,6 +7,8 @@ import { NextApiResponse } from 'next';
 import { SteamUser } from '../lib/passport';
 import Navbar from '../components/Layout/Navbar/Navbar';
 import { Bebas_Neue } from 'next/font/google';
+import { useUser } from '../hooks/useUser';
+import { useEffect } from 'react';
 
 const links = [
   {
@@ -33,6 +35,12 @@ interface Props {
 }
 
 export default function Home({ user }: Props) {
+  const { setUser } = useUser();
+
+  useEffect(() => {
+    setUser(user);
+  }, [setUser, user]);
+
   return (
     <>
       <Head>
@@ -45,7 +53,7 @@ export default function Home({ user }: Props) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={styles.main}>
-        <Navbar user={user} />
+        <Navbar />
         <div className={styles.linksWrapper}>
           {links.map((link) => (
             <Link
