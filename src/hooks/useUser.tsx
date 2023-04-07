@@ -1,9 +1,14 @@
-import { ReactNode, createContext, useContext, useState } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { SteamUser } from '../lib/passport';
 
 interface UserContextType {
   user: SteamUser | null;
-  setUser: (user: SteamUser) => void;
 }
 
 const UserContext = createContext<UserContextType>(null);
@@ -13,13 +18,17 @@ export const useUser = () => useContext(UserContext);
 const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<SteamUser | null>(null);
 
-  const handleSetUser = (user: SteamUser) => {
-    setUser(user);
-  };
+  useEffect(() => {
+    const getUser = async () => {
+      const response = await fetch('/api/auth/user');
+      setUser(await response.json());
+    };
+
+    getUser();
+  }, []);
 
   const contextValue: UserContextType = {
     user: user,
-    setUser: handleSetUser,
   };
 
   return (
