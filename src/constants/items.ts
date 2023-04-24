@@ -3,7 +3,7 @@ export type ItemData = {
   image: string;
 };
 
-export const items = [
+export const items: ItemData[] = [
   { name: 'rocket', image: '/item_images/rocket.png' },
   { name: 'explosive ammo', image: '/item_images/explosive_ammo.png' },
   {

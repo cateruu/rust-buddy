@@ -1,0 +1,18 @@
+.checkboxes > div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.checkbox {
+  cursor: pointer;
+  height: 1.5rem;
+  width: 1.5rem;
+  background: var(--dark-bg);
+}
+
+.checked {
+  background-color: var(--light-font);
+  box-sizing: border-box;
+  border: 5px solid var(--dark-bg);
+}

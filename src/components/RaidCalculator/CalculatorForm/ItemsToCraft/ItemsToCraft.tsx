@@ -14,6 +14,7 @@ const ItemsToCraft = ({ items }: Props) => {
     <div className={styles.items}>
       {items.map((item) => (
         <div
+          key={item.name}
           className={`${styles.item} ${
             selectedItem && selectedItem.name === item.name
               ? `${styles.selected}`
