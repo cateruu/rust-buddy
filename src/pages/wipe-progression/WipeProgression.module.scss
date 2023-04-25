@@ -1,0 +1,32 @@
+.main {
+  width: 100%;
+  height: calc(100vh - 100px);
+  position: relative;
+}
+
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  text-align: center;
+}
+
+.login {
+  font-size: 14px;
+  font-weight: 500;
+  width: 120px;
+  height: 44px;
+  background-color: var(--red);
+  display: grid;
+  place-content: center;
+  margin-top: 20px;
+}
