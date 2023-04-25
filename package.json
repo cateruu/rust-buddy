@@ -27,6 +27,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@phosphor-icons/react": "^2.0.8",
     "@types/cookie-session": "^2.0.44",
     "@types/passport": "^1.0.12",
     "@types/passport-steam": "^1.0.1",

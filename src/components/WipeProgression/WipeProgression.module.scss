@@ -24,10 +24,28 @@
   border: 3px solid var(--border);
   display: grid;
   place-items: center;
+  position: relative;
   transition: 0.11s;
 
   &:hover {
     border-color: var(--red);
+
+    .delete {
+      display: block;
+    }
+  }
+}
+
+.delete {
+  display: none;
+  color: var(--dark-font);
+  font-size: 25px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  &:hover {
+    color: var(--red);
   }
 }
 
