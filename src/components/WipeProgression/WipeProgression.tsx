@@ -6,7 +6,7 @@ import AddBoardModal from '../AddBoardModal/AddBoardModal';
 import { useUser } from '../../hooks/useUser';
 import { supabase } from '../../lib/supabase';
 import { Trash } from '@phosphor-icons/react';
-import DelteBoardModal from '../DeleteBoardModal/DelteBoardMdal';
+import DeleteBoardModal from '../DeleteBoardModal/DeleteBoardModal';
 import BoardHubLoader from '../Loaders/BoardHubLoader';
 
 const WipeProgression = () => {
@@ -69,7 +69,7 @@ const WipeProgression = () => {
   return (
     <>
       {isDeleteBoardModalOpen && (
-        <DelteBoardModal
+        <DeleteBoardModal
           onClose={closeDeleteBoardModal}
           id={boardIdForDelete.current}
         />

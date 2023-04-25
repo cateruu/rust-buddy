@@ -9,7 +9,7 @@ interface Props {
   id: string;
 }
 
-const DelteBoardModal = ({ onClose, id }: Props) => {
+const DeleteBoardModal = ({ onClose, id }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleBoardDelete = async () => {
@@ -61,4 +61,4 @@ const DelteBoardModal = ({ onClose, id }: Props) => {
   );
 };
 
-export default DelteBoardModal;
+export default DeleteBoardModal;
