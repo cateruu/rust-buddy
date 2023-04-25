@@ -7,6 +7,7 @@ import { useUser } from '../../hooks/useUser';
 import { supabase } from '../../lib/supabase';
 import { Trash } from '@phosphor-icons/react';
 import DelteBoardModal from '../DeleteBoardModal/DelteBoardMdal';
+import BoardHubLoader from '../Loaders/BoardHubLoader';
 
 const WipeProgression = () => {
   const {
@@ -38,7 +39,7 @@ const WipeProgression = () => {
       setUserBoards(data);
     };
 
-    getUserBoards();
+    getUserBoards().then(() => setIsLoading(false));
   }, [user]);
 
   useEffect(() => {
@@ -74,11 +75,18 @@ const WipeProgression = () => {
         />
       )}
       {isAddBoardModalOpen && <AddBoardModal onClose={closeAddBoardModal} />}
+
       <div className={styles.container}>
         <section>
           <h2 className={styles.header}>My Boards</h2>
           <section className={styles['boards-wrapper']}>
-            {userBoards &&
+            {isLoading ? (
+              <>
+                <BoardHubLoader />
+                <BoardHubLoader />
+              </>
+            ) : (
+              userBoards &&
               userBoards.map((board) => (
                 <Link
                   key={board.id}
@@ -95,7 +103,8 @@ const WipeProgression = () => {
                   />
                   {board.name}
                 </Link>
-              ))}
+              ))
+            )}
             <div className={styles['add-board']} onClick={openAddBoardModal}>
               +
             </div>

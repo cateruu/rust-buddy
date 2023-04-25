@@ -1,0 +1,27 @@
+.loader {
+  width: 250px;
+  height: 250px;
+  background-color: var(--dark-bg);
+  display: grid;
+  place-items: center;
+}
+
+.loader {
+  background-color: var(--secondary-bg);
+  background: linear-gradient(
+      100deg,
+      rgba(31, 31, 31, 0) 40%,
+      rgba(31, 31, 31, 0.5) 50%,
+      rgba(31, 31, 31, 0) 60%
+    )
+    var(--dark-bg);
+  background-size: 200% 100%;
+  background-position-x: 180%;
+  animation: 1s loading linear infinite;
+}
+
+@keyframes loading {
+  to {
+    background-position-x: -20%;
+  }
+}
