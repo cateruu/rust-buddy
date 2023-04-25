@@ -1,0 +1,47 @@
+.container {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  padding: 50px 170px 0 170px;
+  background-color: var(--main-bg);
+}
+
+.header {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.boards-wrapper {
+  display: flex;
+  gap: 25px;
+  margin: 25px 0 100px 0;
+}
+
+.board {
+  width: 250px;
+  height: 250px;
+  background-color: var(--dark-bg);
+  border: 3px solid var(--border);
+  display: grid;
+  place-items: center;
+  transition: 0.11s;
+
+  &:hover {
+    border-color: var(--red);
+  }
+}
+
+.add-board {
+  width: 250px;
+  height: 250px;
+  border: 3px dashed var(--border);
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.11s;
+
+  &:hover {
+    border-color: var(--red);
+  }
+}
