@@ -12,7 +12,7 @@
   display: none;
   z-index: 10;
 
-  @include tabletS {
+  @include tabletM {
     display: block;
   }
 }

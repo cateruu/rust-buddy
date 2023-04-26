@@ -18,15 +18,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @include tabletS {
+  @include tabletM {
     width: 100%;
   }
 }
 
 .button {
   min-height: 44px;
-  min-width: 120px;
-  line-height: 44px;
-  text-align: center;
+  min-width: 44px;
+  display: grid;
+  place-items: center;
   background-color: var(--secondary-bg);
+  justify-self: flex-end;
 }
