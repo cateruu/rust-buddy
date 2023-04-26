@@ -47,11 +47,25 @@ const WipeProgression = () => {
       .channel('any')
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'boards' },
+        {
+          event: '*',
+          schema: 'public',
+          table: 'boards',
+          filter: `creator=eq.${user.id}`,
+        },
         (payload) => {
           if (payload.eventType === 'DELETE') {
             setUserBoards((prevBoards) =>
               prevBoards.filter((board) => board.id !== payload.old.id)
+            );
+            return;
+          }
+
+          if (payload.eventType === 'UPDATE') {
+            setUserBoards((prevBoards) =>
+              prevBoards.map((board) =>
+                board.id === payload.new.id ? payload.new : board
+              )
             );
             return;
           }
