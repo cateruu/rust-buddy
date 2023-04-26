@@ -81,33 +81,36 @@ const WipeProgression = () => {
           <h2 className={styles.header}>My Boards</h2>
           <section className={styles['boards-wrapper']}>
             {isLoading ? (
-              <>
-                <BoardHubLoader />
-                <BoardHubLoader />
-              </>
+              <BoardHubLoader />
             ) : (
-              userBoards &&
-              userBoards.map((board) => (
-                <Link
-                  key={board.id}
-                  href={`/wipe-progression/${board.id}`}
-                  className={styles.board}
-                >
-                  <Trash
-                    className={styles.delete}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      openDeleteBoardModal();
-                      boardIdForDelete.current = board.id;
-                    }}
-                  />
-                  {board.name}
-                </Link>
-              ))
+              userBoards && (
+                <>
+                  {userBoards.map((board) => (
+                    <Link
+                      key={board.id}
+                      href={`/wipe-progression/${board.id}`}
+                      className={styles.board}
+                    >
+                      <Trash
+                        className={styles.delete}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          openDeleteBoardModal();
+                          boardIdForDelete.current = board.id;
+                        }}
+                      />
+                      {board.name}
+                    </Link>
+                  ))}
+                  <div
+                    className={styles['add-board']}
+                    onClick={openAddBoardModal}
+                  >
+                    +
+                  </div>
+                </>
+              )
             )}
-            <div className={styles['add-board']} onClick={openAddBoardModal}>
-              +
-            </div>
           </section>
         </section>
         <section>
