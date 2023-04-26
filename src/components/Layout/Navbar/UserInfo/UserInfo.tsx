@@ -4,6 +4,7 @@ import { SteamUser } from '../../../../lib/passport';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useUser } from '../../../../hooks/useUser';
+import { SignOut } from '@phosphor-icons/react';
 
 const UserInfo = () => {
   const { user } = useUser();
@@ -19,7 +20,7 @@ const UserInfo = () => {
       </div>
       <p className={styles.name}>{user.displayName}</p>
       <Link href='/api/auth/logout' className={styles.button}>
-        Logout
+        <SignOut height={22} width={22} />
       </Link>
     </div>
   );
