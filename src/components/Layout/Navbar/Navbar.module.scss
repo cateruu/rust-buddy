@@ -32,6 +32,10 @@
   &:hover {
     color: var(--red);
   }
+
+  @include tabletM {
+    display: none;
+  }
 }
 
 .activeLink {
@@ -54,7 +58,7 @@
 }
 
 .userWrapper {
-  @include tabletS {
+  @include tabletM {
     display: none;
   }
 }
