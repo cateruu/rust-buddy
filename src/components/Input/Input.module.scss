@@ -20,6 +20,15 @@
   }
 }
 
+.input-container {
+  display: flex;
+}
+
+.icon {
+  background-color: var(--dark-bg);
+  padding-left: 12px;
+}
+
 .error {
   border-color: var(--red);
 }
