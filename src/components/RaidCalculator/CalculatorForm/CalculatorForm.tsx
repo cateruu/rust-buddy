@@ -1,7 +1,7 @@
 import ItemsToCraft from './ItemsToCraft/ItemsToCraft';
 import styles from './CalculatorForm.module.scss';
 import { items } from '../../../constants/items';
-import Checkboxes from '../Checkbox/Checkboxes';
+import Checkboxes from './Checkbox/Checkboxes';
 
 const CalculatorForm = () => {
   return (

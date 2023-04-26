@@ -8,6 +8,7 @@ interface Props {
   labelText?: string;
   width?: string;
   error?: string;
+  placeholder?: string;
 }
 
 const Input = ({
@@ -17,13 +18,14 @@ const Input = ({
   labelText,
   width,
   error,
+  placeholder = '',
 }: Props) => {
   return (
     <div className={styles['input-wrapper']}>
       {withLabel && <p className={styles['input-label']}>{labelText}</p>}
       <input
         type='text'
-        placeholder='Rust Buddy'
+        placeholder={placeholder}
         className={`${styles.input} ${error && styles.error}`}
         value={value}
         onChange={onChange}

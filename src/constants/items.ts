@@ -10,4 +10,12 @@ export const items: ItemData[] = [
     name: 'timed explosive charge',
     image: '/item_images/timed_explosive_charge.png',
   },
+  {
+    name: 'gun powder',
+    image: '/item_images/gun_powder.png',
+  },
+  {
+    name: 'sulfur',
+    image: '/item_images/sulfur.png',
+  },
 ];
