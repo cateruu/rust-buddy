@@ -40,7 +40,7 @@ passport.use(
 
       if (selectError) console.error('select user error ->', selectError);
 
-      if (data) {
+      if (data.length) {
         const { error: updateError } = await supabase
           .from('users')
           .update({
