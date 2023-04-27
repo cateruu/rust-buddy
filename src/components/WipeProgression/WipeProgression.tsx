@@ -8,6 +8,7 @@ import { Trash } from '@phosphor-icons/react';
 import BoardHubLoader from '../Loaders/BoardHubLoader';
 import DeleteBoardModal from './DeleteBoardModal/DeleteBoardModal';
 import AddBoardModal from './AddBoardModal/AddBoardModal';
+import { toast } from 'react-hot-toast';
 
 const WipeProgression = () => {
   const {
@@ -37,6 +38,10 @@ const WipeProgression = () => {
         .eq('creator', user.id);
 
       setUserBoards(data);
+
+      if (error) {
+        toast.error(`${error.message}. Please try again.`);
+      }
     };
 
     getUserBoards().then(() => setIsLoading(false));
@@ -58,6 +63,7 @@ const WipeProgression = () => {
             setUserBoards((prevBoards) =>
               prevBoards.filter((board) => board.id !== payload.old.id)
             );
+            toast.success('Successfully deleted board');
             return;
           }
 
@@ -67,10 +73,12 @@ const WipeProgression = () => {
                 board.id === payload.new.id ? payload.new : board
               )
             );
+            toast.success('Successfully updated board');
             return;
           }
 
           setUserBoards((prevBoards) => [payload.new, ...prevBoards]);
+          toast.success('Successfully added board');
         }
       )
       .subscribe();
