@@ -10,7 +10,7 @@ const poppins = Poppins({
 interface Props {
   text: string;
   variant: 'primary' | 'secondary';
-  onClick: () => void;
+  onClick: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   width?: number;
 }
 

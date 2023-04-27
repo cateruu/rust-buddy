@@ -5,6 +5,7 @@ import Button from '../../Button/Button';
 import { ArrowBendUpLeft } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useUser } from '../../../hooks/useUser';
+import toast from 'react-hot-toast';
 
 interface Props {
   data: BoardType;
@@ -15,8 +16,14 @@ const Board = ({ data }: Props) => {
   const router = useRouter();
 
   const handleAddFriend = () => {};
-  const handleShare = () => {};
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.toString());
+    toast.success('Copied to clipboard');
+  };
+
   const handleAddItems = () => {};
+
   const handleManageFriend = () => {};
 
   return (
