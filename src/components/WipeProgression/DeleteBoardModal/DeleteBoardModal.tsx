@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './DeleteBoardModal.module.scss';
-import Modal from '../Modal/Modal';
-import { supabase } from '../../lib/supabase';
 import { RotatingLines } from 'react-loader-spinner';
+import { supabase } from '../../../lib/supabase';
+import Modal from '../../Modal/Modal';
 
 interface Props {
   onClose: () => void;

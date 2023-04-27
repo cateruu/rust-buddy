@@ -1,0 +1,63 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-template: 44px auto auto auto / 320px 1fr;
+  grid-template-areas:
+    'back share'
+    'info tier1'
+    'info tier2'
+    'info tier3';
+}
+
+.back {
+  grid-area: back;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  border: none;
+  outline: none;
+  background: none;
+  color: var(--dark-font);
+  cursor: pointer;
+  transition: 0.11s;
+
+  &:hover {
+    color: var(--light-font);
+  }
+
+  & p {
+    margin-left: 10px;
+    font-size: 10px;
+  }
+}
+
+.share {
+  grid-area: share;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.info {
+  grid-area: info;
+}
+
+.name {
+  margin-bottom: 12px;
+}
+
+.text {
+  color: var(--dark-font);
+  font-size: 14px;
+}
+
+.scraps {
+  margin: 50px 0;
+}
+
+.managment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 60%;
+}

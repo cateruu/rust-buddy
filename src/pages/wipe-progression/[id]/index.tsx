@@ -3,8 +3,9 @@ import styles from './BoardPage.module.scss';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { supabase } from '../../../lib/supabase';
+import Board from '../../../components/WipeProgression/Board/Board';
 
-export interface Board {
+export interface BoardType {
   id: string;
   creator: number;
   name: string;
@@ -13,7 +14,7 @@ export interface Board {
 }
 
 interface Props {
-  board: Board[];
+  board: BoardType[];
 }
 
 const BoardPage = ({ board }: Props) => {
@@ -25,15 +26,15 @@ const BoardPage = ({ board }: Props) => {
       .on(
         'postgres_changes',
         {
-          event: 'UPDATE',
+          event: '*',
           schema: 'public',
           table: 'boards',
-          filter: `id=eq.${boardData.id}`,
+          filter: `id=eq.${boardData?.id}`,
         },
         (payload) => {
           console.log(payload);
 
-          setBoardData(payload.new as Board);
+          setBoardData(payload.new as BoardType);
         }
       )
       .subscribe();
@@ -42,8 +43,6 @@ const BoardPage = ({ board }: Props) => {
       channel.unsubscribe();
     };
   }, [boardData?.id]);
-
-  console.log(boardData);
 
   return (
     <>
@@ -60,7 +59,7 @@ const BoardPage = ({ board }: Props) => {
         {!boardData ? (
           <p className={styles['not-exist']}>This board does not exist</p>
         ) : (
-          <div>{boardData.name}</div>
+          <Board data={boardData} />
         )}
       </main>
     </>
