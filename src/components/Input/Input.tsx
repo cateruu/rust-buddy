@@ -3,7 +3,7 @@ import styles from './Input.module.scss';
 import Image from 'next/image';
 
 interface Props {
-  value: string;
+  value: string | number;
   onChange: (event: ChangeEvent) => void;
   withLabel?: boolean;
   labelText?: string;

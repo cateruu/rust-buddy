@@ -5,10 +5,16 @@ import { ItemData } from '../../../../constants/items';
 
 type Props = {
   items: ItemData[];
+  onSelect: (selectedItem: ItemData) => void;
 };
 
-const ItemsToCraft = ({ items }: Props) => {
+const ItemsToCraft = ({ items, onSelect }: Props) => {
   const [selectedItem, setSelectedItem] = useState<ItemData>(null);
+
+  const setSelectedItemHandler = (selectedItem: ItemData) => {
+    setSelectedItem(selectedItem);
+    onSelect(selectedItem);
+  };
 
   return (
     <div className={styles.items}>
@@ -20,7 +26,7 @@ const ItemsToCraft = ({ items }: Props) => {
               ? `${styles.selected}`
               : ''
           }`}
-          onClick={() => setSelectedItem(item)}
+          onClick={() => setSelectedItemHandler(item)}
         >
           <Image alt={item.name} src={item.image} fill />
         </div>
