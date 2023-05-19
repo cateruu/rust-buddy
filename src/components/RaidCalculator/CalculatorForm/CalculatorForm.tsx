@@ -18,12 +18,29 @@ const CalculatorForm = () => {
   const onCheckboxSelect = (selectedCheckbox: string) =>
     setSelectedCheckbox(selectedCheckbox);
 
-  const onItemAmountChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setItemAmount(+e.target.value);
-  const onSulfurAmountChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setSulfurAmount(+e.target.value);
-  const onGunPowderAmountChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setGunPowderAmount(+e.target.value);
+  const onAmountChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    toChange: string
+  ) => {
+    const amount = +e.target.value;
+    if (isNaN(amount)) return;
+    if (amount > 1000000) return;
+
+    if (toChange === 'item') {
+      setItemAmount(amount);
+      return;
+    }
+
+    if (toChange === 'sulfur') {
+      setSulfurAmount(amount);
+      return;
+    }
+
+    if (toChange === 'gunpowder') {
+      setGunPowderAmount(amount);
+      return;
+    }
+  };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,9 +63,7 @@ const CalculatorForm = () => {
         itemAmount={itemAmount}
         sulfurAmount={sulfurAmount}
         gunpowderAmount={gunPowderAmount}
-        onItemAmountChange={onItemAmountChange}
-        onSulfurAmountChange={onSulfurAmountChange}
-        onGunPowderAmountChange={onGunPowderAmountChange}
+        onAmountChange={onAmountChange}
       />
     </form>
   );

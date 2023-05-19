@@ -9,9 +9,7 @@ type Props = {
   itemAmount: number;
   sulfurAmount: number;
   gunpowderAmount: number;
-  onItemAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onSulfurAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onGunPowderAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onAmountChange: (e: ChangeEvent<HTMLInputElement>, toChange: string) => void;
 };
 
 const Inputs = ({
@@ -20,16 +18,14 @@ const Inputs = ({
   itemAmount,
   sulfurAmount,
   gunpowderAmount,
-  onItemAmountChange,
-  onSulfurAmountChange,
-  onGunPowderAmountChange,
+  onAmountChange,
 }: Props) => {
   return (
     <div className={styles.inputs}>
       {selectedCheckbox === 'items' && (
         <Input
           value={itemAmount}
-          onChange={onItemAmountChange}
+          onChange={(e) => onAmountChange(e, 'item')}
           withLabel
           labelText={`${selectedItem.name} amount:`}
           icon={`${selectedItem.image}`}
@@ -40,14 +36,14 @@ const Inputs = ({
         <>
           <Input
             value={sulfurAmount}
-            onChange={onSulfurAmountChange}
+            onChange={(e) => onAmountChange(e, 'sulfur')}
             withLabel
             labelText='Sulfur amount:'
             icon='/item_images/sulfur.png'
           />
           <Input
             value={gunpowderAmount}
-            onChange={onGunPowderAmountChange}
+            onChange={(e) => onAmountChange(e, 'gunpowder')}
             withLabel
             labelText='Gun powder amount:'
             icon='/item_images/gun_powder.png'

@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 interface Props {
   value: string | number;
-  onChange: (event: ChangeEvent) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>, toChange?: string) => void;
   withLabel?: boolean;
   labelText?: string;
   width?: string;
