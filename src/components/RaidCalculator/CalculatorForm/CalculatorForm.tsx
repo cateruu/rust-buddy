@@ -6,8 +6,8 @@ import { ChangeEvent, useState } from 'react';
 import Inputs from './Inputs/Inputs';
 
 const CalculatorForm = () => {
-  const [selectedItem, setSelectedItem] = useState<ItemData | null>(null);
-  const [selectedCheckbox, setSelectedCheckbox] = useState('');
+  const [selectedItem, setSelectedItem] = useState<ItemData>(items[0]);
+  const [selectedCheckbox, setSelectedCheckbox] = useState('items');
 
   const [itemAmount, setItemAmount] = useState(0);
   const [sulfurAmount, setSulfurAmount] = useState(0);
@@ -18,35 +18,38 @@ const CalculatorForm = () => {
   const onCheckboxSelect = (selectedCheckbox: string) =>
     setSelectedCheckbox(selectedCheckbox);
 
-  const onItemAmountChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setItemAmount(+event.target.value);
-  const onSulfurAmountChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setSulfurAmount(+event.target.value);
-  const onGunPowderAmountChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setGunPowderAmount(+event.target.value);
+  const onItemAmountChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setItemAmount(+e.target.value);
+  const onSulfurAmountChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setSulfurAmount(+e.target.value);
+  const onGunPowderAmountChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setGunPowderAmount(+e.target.value);
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
 
   return (
-    <form className={styles.form}>
-      <div className={styles.label}>Item to craft:</div>
-      <ItemsToCraft items={items} onSelect={onItemSelect} />
-      {selectedItem && (
-        <>
-          <div className={styles.label}>Base results on:</div>
-          <Checkboxes onSelect={onCheckboxSelect} />
-        </>
-      )}
-      {selectedCheckbox && (
-        <Inputs
-          selectedCheckbox={selectedCheckbox}
-          selectedItem={selectedItem}
-          itemAmount={itemAmount}
-          sulfurAmount={sulfurAmount}
-          gunpowderAmount={gunPowderAmount}
-          onItemAmountChange={onItemAmountChange}
-          onSulfurAmountChange={onSulfurAmountChange}
-          onGunPowderAmountChange={onGunPowderAmountChange}
-        />
-      )}
+    <form className={styles.form} onSubmit={(e) => onSubmit(e)}>
+      <ItemsToCraft
+        items={items}
+        onSelect={onItemSelect}
+        selectedItem={selectedItem}
+      />
+      <Checkboxes
+        onSelect={onCheckboxSelect}
+        selectedCheckbox={selectedCheckbox}
+      />
+      <Inputs
+        selectedCheckbox={selectedCheckbox}
+        selectedItem={selectedItem}
+        itemAmount={itemAmount}
+        sulfurAmount={sulfurAmount}
+        gunpowderAmount={gunPowderAmount}
+        onItemAmountChange={onItemAmountChange}
+        onSulfurAmountChange={onSulfurAmountChange}
+        onGunPowderAmountChange={onGunPowderAmountChange}
+      />
     </form>
   );
 };

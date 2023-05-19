@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import { ItemData } from '../../../../constants/items';
-import Input from '../../../Input/Input';
+import Input from '../../../UI/Input/Input';
 import styles from './Inputs.module.scss';
 
 type Props = {
@@ -9,9 +9,9 @@ type Props = {
   itemAmount: number;
   sulfurAmount: number;
   gunpowderAmount: number;
-  onItemAmountChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onSulfurAmountChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onGunPowderAmountChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onItemAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSulfurAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onGunPowderAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Inputs = ({

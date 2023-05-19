@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './WipeProgression.module.scss';
 import Link from 'next/link';
 import useModal from '../../hooks/useModal';
-import AddBoardModal from '../AddBoardModal/AddBoardModal';
+import AddBoardModal from './AddBoardModal/AddBoardModal';
 import { useUser } from '../../hooks/useUser';
 import { supabase } from '../../lib/supabase';
 import { Trash } from '@phosphor-icons/react';
-import DeleteBoardModal from '../DeleteBoardModal/DeleteBoardModal';
-import BoardHubLoader from '../Loaders/BoardHubLoader';
+import DeleteBoardModal from './DeleteBoardModal/DeleteBoardModal';
+import BoardHubLoader from '../UI/Loaders/BoardHubLoader';
 
 const WipeProgression = () => {
   const {
