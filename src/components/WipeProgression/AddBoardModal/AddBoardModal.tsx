@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import styles from './AddBoardModal.module.scss';
-import Modal from '../Modal/Modal';
-import { supabase } from '../../lib/supabase';
-import { useUser } from '../../hooks/useUser';
+import Modal from '../../UI/Modal/Modal';
+import { supabase } from '../../../lib/supabase';
+import { useUser } from '../../../hooks/useUser';
 import { v4 as uuidv4 } from 'uuid';
 import { RotatingLines } from 'react-loader-spinner';
-import Input from '../Input/Input';
+import Input from '../../UI/Input/Input';
 
 interface Props {
   onClose: () => void;
