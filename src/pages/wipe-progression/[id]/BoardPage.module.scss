@@ -1,0 +1,13 @@
+.main {
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  position: relative;
+  padding: 50px 150px 0 150px;
+  display: flex;
+}
+
+.not-exist {
+  font-size: 3rem;
+  font-weight: 600;
+  margin: auto;
+}

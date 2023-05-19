@@ -64,6 +64,7 @@ const AddBoardModal = ({ onClose }: Props) => {
           value={name}
           withLabel={true}
           error={error}
+          placeholder='Rust Buddy'
         />
         <div className={styles['button-wrapper']}>
           <button
