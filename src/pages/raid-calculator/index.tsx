@@ -1,4 +1,4 @@
-import Input from '../../components/Input/Input';
+import Input from '../../components/UI/Input/Input';
 import styles from './RaidCalculator.module.scss';
 
 const RaidCalculator = () => {
