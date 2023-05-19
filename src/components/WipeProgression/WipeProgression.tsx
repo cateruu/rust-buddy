@@ -8,6 +8,7 @@ import { supabase } from '../../lib/supabase';
 import { Trash } from '@phosphor-icons/react';
 import DeleteBoardModal from './DeleteBoardModal/DeleteBoardModal';
 import BoardHubLoader from '../UI/Loaders/BoardHubLoader';
+import { toast } from 'react-hot-toast';
 
 const WipeProgression = () => {
   const {
@@ -37,6 +38,10 @@ const WipeProgression = () => {
         .eq('creator', user.id);
 
       setUserBoards(data);
+
+      if (error) {
+        toast.error(`${error.message}. Please try again.`);
+      }
     };
 
     getUserBoards().then(() => setIsLoading(false));
@@ -47,16 +52,33 @@ const WipeProgression = () => {
       .channel('any')
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'boards' },
+        {
+          event: '*',
+          schema: 'public',
+          table: 'boards',
+          filter: `creator=eq.${user.id}`,
+        },
         (payload) => {
           if (payload.eventType === 'DELETE') {
             setUserBoards((prevBoards) =>
               prevBoards.filter((board) => board.id !== payload.old.id)
             );
+            toast.success('Successfully deleted board');
+            return;
+          }
+
+          if (payload.eventType === 'UPDATE') {
+            setUserBoards((prevBoards) =>
+              prevBoards.map((board) =>
+                board.id === payload.new.id ? payload.new : board
+              )
+            );
+            toast.success('Successfully updated board');
             return;
           }
 
           setUserBoards((prevBoards) => [payload.new, ...prevBoards]);
+          toast.success('Successfully added board');
         }
       )
       .subscribe();
@@ -81,33 +103,36 @@ const WipeProgression = () => {
           <h2 className={styles.header}>My Boards</h2>
           <section className={styles['boards-wrapper']}>
             {isLoading ? (
-              <>
-                <BoardHubLoader />
-                <BoardHubLoader />
-              </>
+              <BoardHubLoader />
             ) : (
-              userBoards &&
-              userBoards.map((board) => (
-                <Link
-                  key={board.id}
-                  href={`/wipe-progression/${board.id}`}
-                  className={styles.board}
-                >
-                  <Trash
-                    className={styles.delete}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      openDeleteBoardModal();
-                      boardIdForDelete.current = board.id;
-                    }}
-                  />
-                  {board.name}
-                </Link>
-              ))
+              userBoards && (
+                <>
+                  {userBoards.map((board) => (
+                    <Link
+                      key={board.id}
+                      href={`/wipe-progression/${board.id}`}
+                      className={styles.board}
+                    >
+                      <Trash
+                        className={styles.delete}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          openDeleteBoardModal();
+                          boardIdForDelete.current = board.id;
+                        }}
+                      />
+                      {board.name}
+                    </Link>
+                  ))}
+                  <div
+                    className={styles['add-board']}
+                    onClick={openAddBoardModal}
+                  >
+                    +
+                  </div>
+                </>
+              )
             )}
-            <div className={styles['add-board']} onClick={openAddBoardModal}>
-              +
-            </div>
           </section>
         </section>
         <section>
