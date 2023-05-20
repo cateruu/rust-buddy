@@ -10,6 +10,9 @@ type Props = {
   sulfurAmount: number;
   gunpowderAmount: number;
   onAmountChange: (e: ChangeEvent<HTMLInputElement>, toChange: string) => void;
+  sulfurInputError: string;
+  itemInputError: string;
+  gunPowderInputError: string;
 };
 
 const Inputs = ({
@@ -19,20 +22,24 @@ const Inputs = ({
   sulfurAmount,
   gunpowderAmount,
   onAmountChange,
+  sulfurInputError,
+  itemInputError,
+  gunPowderInputError,
 }: Props) => {
   return (
     <div className={styles.inputs}>
-      {selectedCheckbox === 'items' && (
+      {selectedCheckbox === 'ITEM_AMOUNT' && (
         <Input
           value={itemAmount}
           onChange={(e) => onAmountChange(e, 'item')}
           withLabel
           labelText={`${selectedItem.name} amount:`}
           icon={`${selectedItem.image}`}
+          error={itemInputError}
         />
       )}
 
-      {selectedCheckbox === 'resources' && (
+      {selectedCheckbox === 'RESOURCES_AMOUNT' && (
         <>
           <Input
             value={sulfurAmount}
@@ -40,6 +47,7 @@ const Inputs = ({
             withLabel
             labelText='Sulfur amount:'
             icon='/item_images/sulfur.png'
+            error={sulfurInputError}
           />
           <Input
             value={gunpowderAmount}
@@ -47,6 +55,7 @@ const Inputs = ({
             withLabel
             labelText='Gun powder amount:'
             icon='/item_images/gun_powder.png'
+            error={gunPowderInputError}
           />
         </>
       )}

@@ -26,7 +26,7 @@ const Input = ({
   return (
     <div className={styles['input-wrapper']}>
       {withLabel && <p className={styles['input-label']}>{labelText}</p>}
-      <div className={styles['input-container']}>
+      <div className={`${styles['input-container']} ${error && styles.error}`}>
         {icon && (
           <div className={styles.icon}>
             <Image src={icon} alt={icon} width={35} height={35} />
@@ -35,7 +35,7 @@ const Input = ({
         <input
           type='text'
           placeholder={placeholder}
-          className={`${styles.input} ${error && styles.error}`}
+          className={styles.input}
           value={value}
           onChange={onChange}
           style={{ minWidth: width ? width : '300px' }}
