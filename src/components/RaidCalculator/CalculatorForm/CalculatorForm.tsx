@@ -2,7 +2,7 @@ import ItemsToCraft from './ItemsToCraft/ItemsToCraft';
 import styles from './CalculatorForm.module.scss';
 import { ItemData, items } from '../../../constants/items';
 import Checkboxes from './Checkboxes/Checkboxes';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import Inputs from './Inputs/Inputs';
 
 const CalculatorForm = () => {
@@ -17,6 +17,16 @@ const CalculatorForm = () => {
     setSelectedItem(selectedItem);
   const onCheckboxSelect = (selectedCheckbox: string) =>
     setSelectedCheckbox(selectedCheckbox);
+
+  useEffect(() => {
+    if (itemAmount === 0 && sulfurAmount === 0 && gunPowderAmount === 0) return;
+    const resetInputsValues = () => {
+      setItemAmount(0);
+      setSulfurAmount(0);
+      setGunPowderAmount(0);
+    };
+    resetInputsValues();
+  }, [selectedCheckbox, selectedItem]);
 
   const onAmountChange = (
     e: ChangeEvent<HTMLInputElement>,
