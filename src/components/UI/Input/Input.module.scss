@@ -28,6 +28,9 @@
 .icon {
   background-color: var(--dark-bg);
   padding-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .error {

@@ -29,7 +29,7 @@ const Input = ({
       <div className={`${styles['input-container']} ${error && styles.error}`}>
         {icon && (
           <div className={styles.icon}>
-            <Image src={icon} alt={icon} width={35} height={35} />
+            <Image src={icon} alt={icon} width={32} height={32} />
           </div>
         )}
         <input

@@ -20,9 +20,7 @@ const ItemsToCraft = ({ items, onSelect, selectedItem }: Props) => {
           <div
             key={item.name}
             className={`${styles.item} ${
-              selectedItem && selectedItem.name === item.name
-                ? `${styles.selected}`
-                : ''
+              selectedItem && selectedItem.name === item.name && styles.selected
             }`}
             onClick={() => setSelectedItemHandler(item)}
           >

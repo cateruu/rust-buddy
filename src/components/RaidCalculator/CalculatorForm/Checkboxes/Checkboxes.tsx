@@ -14,7 +14,7 @@ const Checkboxes = ({ onSelect, selectedCheckbox }: Props) => {
           <div className={styles.text}>Gunpowder and sulfur amount</div>
           <div
             className={`${styles.checkbox} ${
-              selectedCheckbox === 'RESOURCES_AMOUNT' ? styles.checked : ''
+              selectedCheckbox === 'RESOURCES_AMOUNT' && styles.checked
             }`}
             onClick={() => onSelect('RESOURCES_AMOUNT')}
           />
@@ -23,7 +23,7 @@ const Checkboxes = ({ onSelect, selectedCheckbox }: Props) => {
           <div className={styles.text}>Selected item amount</div>
           <div
             className={`${styles.checkbox} ${
-              selectedCheckbox === 'ITEM_AMOUNT' ? styles.checked : ''
+              selectedCheckbox === 'ITEM_AMOUNT' && styles.checked
             }`}
             onClick={() => onSelect('ITEM_AMOUNT')}
           />
