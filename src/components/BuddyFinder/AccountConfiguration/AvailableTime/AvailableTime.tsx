@@ -24,7 +24,7 @@ const AvailableTime = () => {
           <div
             key={hours.value}
             onClick={() => dispatch(setSelectedHours(hours.value))}
-            className={`${styles.hour} ${
+            className={`${styles.select} ${
               selectedHours === hours.value && styles.selected
             }`}
           >
@@ -41,7 +41,7 @@ const AvailableTime = () => {
           <div
             key={day.value}
             onClick={() => dispatch(setSelectedDays(day.value))}
-            className={`${styles.hour} ${
+            className={`${styles.select} ${
               selectedDays === day.value && styles.selected
             }`}
           >

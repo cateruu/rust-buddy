@@ -1,11 +1,12 @@
 import AvailableTime from './AvailableTime/AvailableTime';
+import TagsSelect from './TagsSelect/TagsSelect';
 
 export const configSteps = [
   {
     element: <AvailableTime />,
   },
   {
-    element: <div>step2</div>,
+    element: <TagsSelect />,
   },
   {
     element: <div>step3</div>,
