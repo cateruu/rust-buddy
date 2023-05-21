@@ -7,4 +7,9 @@
   color: var(--white);
   font-size: 14px;
   font-weight: 600;
+
+  &:disabled {
+    background-color: var(--secondary-bg) !important;
+    cursor: not-allowed;
+  }
 }

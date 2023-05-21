@@ -10,9 +10,8 @@ const ProgressionBar = ({ activeStep }: Props) => {
   return (
     <div className={styles.container}>
       {configSteps.map((step, index) => (
-        <>
+        <div className={styles['step-wrapper']} key={index}>
           <div
-            key={index}
             className={`${styles.step} ${
               activeStep === index
                 ? styles.current
@@ -28,7 +27,7 @@ const ProgressionBar = ({ activeStep }: Props) => {
               }`}
             ></div>
           )}
-        </>
+        </div>
       ))}
     </div>
   );

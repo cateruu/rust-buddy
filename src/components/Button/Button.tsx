@@ -12,9 +12,10 @@ interface Props {
   variant: 'primary' | 'secondary';
   onClick: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   width?: number;
+  disabled?: boolean;
 }
 
-const Button = ({ text, variant, width, onClick }: Props) => {
+const Button = ({ text, variant, width, onClick, disabled }: Props) => {
   return (
     <button
       className={`${styles.button} ${poppins.className}`}
@@ -23,6 +24,7 @@ const Button = ({ text, variant, width, onClick }: Props) => {
         width: width ? width : undefined,
       }}
       onClick={onClick}
+      disabled={disabled}
     >
       {text}
     </button>

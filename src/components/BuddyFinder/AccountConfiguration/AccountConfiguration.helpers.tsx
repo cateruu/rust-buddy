@@ -1,6 +1,8 @@
+import AvailableTime from './AvailableTime/AvailableTime';
+
 export const configSteps = [
   {
-    element: <div>step1</div>,
+    element: <AvailableTime />,
   },
   {
     element: <div>step2</div>,
