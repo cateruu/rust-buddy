@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './AccountConfiguration.module.scss';
 import ProgressionBar from './ProgressionBar/ProgressionBar';
 import { configSteps } from './AccountConfiguration.helpers';
+import { useAppSelector } from '../../../hooks/reduxHooks';
 
 const AccountConfiguration = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  const { activeStep } = useAppSelector((state) => state.configuration);
 
   return (
     <>
