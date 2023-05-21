@@ -35,6 +35,11 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
       const response = await fetch('/api/auth/user');
       const steamUser: SteamUser = await response.json();
 
+      if (!steamUser?.id) {
+        setUser(null);
+        return;
+      }
+
       const { data } = await supabase
         .from('users')
         .select()
