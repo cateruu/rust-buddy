@@ -11,14 +11,14 @@ const links = [
     image: '/raid_thumbnail.jpg',
   },
   {
+    name: 'buddy finder',
+    path: '/buddy-finder',
+    image: '/buddy_finder.jpeg',
+  },
+  {
     name: 'wipe progression',
     path: '/wipe-progression',
     image: '/wipe_progression_thumbnail.png',
-  },
-  {
-    name: 'coming soon',
-    path: '/coming-soon',
-    image: '/servers_thumbnail.jpeg',
   },
 ];
 

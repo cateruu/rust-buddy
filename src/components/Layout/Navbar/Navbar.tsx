@@ -30,6 +30,14 @@ const Navbar = () => {
             Raid Calculator
           </Link>
           <Link
+            href='/buddy-finder'
+            className={`${
+              router.pathname === '/buddy-finder' && styles.activeLink
+            } ${styles.link}`}
+          >
+            Buddy Finder
+          </Link>
+          <Link
             href='/wipe-progression'
             className={`${
               router.pathname === '/wipe-progression' && styles.activeLink
