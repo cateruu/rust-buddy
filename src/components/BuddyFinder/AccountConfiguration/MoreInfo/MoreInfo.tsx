@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './MoreInfo.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks';
 import {
@@ -7,16 +7,23 @@ import {
   setLanguage,
   setRegion,
 } from '../../../../store/slices/configurationSlice';
-import { regions } from './MoreInfo.helpers';
+import { languages, regions } from './MoreInfo.helpers';
 import Select from '../../../UI/Select/Select';
 import Button from '../../../UI/Button/Button';
+import { supabase } from '../../../../lib/supabase';
+import { toast } from 'react-hot-toast';
+import { useUser } from '../../../../hooks/useUser';
+import { useRouter } from 'next/router';
 
 const MoreInfo = () => {
   const [ageError, setAgeError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { age, region, language } = useAppSelector(
-    (state) => state.configuration
-  );
+  const { user } = useUser();
+  const router = useRouter();
+
+  const { age, region, language, about, selectedDays, selectedHours, tags } =
+    useAppSelector((state) => state.configuration);
   const dispatch = useAppDispatch();
 
   const handleAgeChange = (value: string) => {
@@ -28,6 +35,47 @@ const MoreInfo = () => {
 
   const handleLanguageChange = (value: string) => {
     dispatch(setLanguage(value));
+  };
+
+  const handleFinish = async () => {
+    setIsLoading(true);
+    if (!/(^100$)|^[1-9]\d?$/.test(age)) {
+      setAgeError('Must be between 1-100');
+      setIsLoading(false);
+      return;
+    }
+
+    if (+age < 16) {
+      setAgeError('You must be 16 or older');
+      setIsLoading(false);
+      return;
+    }
+
+    // console.log(user.steamId);
+    const { error } = await supabase
+      .from('users')
+      .update({
+        age: age,
+        region: region,
+        language: language,
+        about: about,
+        selected_hours: selectedHours,
+        selected_days: selectedDays,
+        tags: tags,
+        finder_account: true,
+      })
+      .eq('id', user.id);
+
+    if (error) {
+      console.error(error);
+      toast.error('Something went wrong. Please try again!');
+      setIsLoading(false);
+      return;
+    }
+
+    toast.success('Configuration complete');
+    setIsLoading(false);
+    router.push('/buddy-finder/');
   };
 
   return (
@@ -64,7 +112,7 @@ const MoreInfo = () => {
       </div>
       <Select
         placeholder='Select language'
-        items={['aha', 'ehe']}
+        items={languages}
         onChange={handleLanguageChange}
         activeItem={language}
       />
@@ -77,9 +125,10 @@ const MoreInfo = () => {
         />
         <Button
           text='Finish'
-          onClick={() => {}}
+          onClick={handleFinish}
           variant='primary'
           width={100}
+          disabled={!age || !region}
         />
       </div>
     </div>

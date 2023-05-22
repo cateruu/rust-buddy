@@ -25,6 +25,15 @@
   border: 1px solid var(--border);
   max-height: 200px;
   width: 100%;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--light-font);
+  }
 }
 
 .item {

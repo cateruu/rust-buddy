@@ -9,6 +9,7 @@ import { SteamUser } from '../lib/passport';
 import { supabase } from '../lib/supabase';
 
 interface User {
+  id: string;
   steamId: number;
   steamUrl: string;
   displayName: string;
@@ -46,6 +47,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
         .eq('steam_id', steamUser.id);
 
       setUser({
+        id: data[0].id,
         steamId: data[0].steam_id,
         steamUrl: data[0].steam_url,
         displayName: data[0].displayName,

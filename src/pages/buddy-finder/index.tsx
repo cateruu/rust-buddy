@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useUser } from '../../hooks/useUser';
 import Head from 'next/head';
 import styles from './BuddyFinder.module.scss';
 import Link from 'next/link';
-import AccountConfiguration from '../../components/BuddyFinder/AccountConfiguration/AccountConfiguration';
+import { useRouter } from 'next/router';
 
 const BuddyFinderPage = () => {
   const { user } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user && !user.finderAccount) {
+      router.push('/buddy-finder/configure');
+    }
+  }, [router, user]);
 
   return (
     <>
@@ -21,11 +28,7 @@ const BuddyFinderPage = () => {
       </Head>
       <main className={styles.main}>
         {user ? (
-          user.finderAccount ? (
-            <div>content</div>
-          ) : (
-            <AccountConfiguration />
-          )
+          <div>content</div>
         ) : (
           <div className={styles.container}>
             <h2 className={styles.text}>

@@ -39,7 +39,7 @@ passport.use(
     ) => {
       const { data, error: selectError } = await supabase
         .from('users')
-        .select('steam_id')
+        .select('id')
         .eq('steam_id', profile.id);
 
       if (selectError) console.error('select user error ->', selectError);
@@ -54,7 +54,7 @@ passport.use(
             country: profile._json.loccountrycode,
             last_activity: new Date(),
           })
-          .eq('steam_id', profile.id);
+          .eq('id', profile.id);
 
         if (updateError) console.error('update user error ->', updateError);
       } else {
