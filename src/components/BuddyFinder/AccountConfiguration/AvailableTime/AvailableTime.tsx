@@ -7,7 +7,7 @@ import {
   setSelectedDays,
   setSelectedHours,
 } from '../../../../store/slices/configurationSlice';
-import Button from '../../../Button/Button';
+import Button from '../../../UI/Button/Button';
 
 const AvailableTime = () => {
   const { selectedDays, selectedHours } = useAppSelector(

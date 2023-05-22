@@ -6,6 +6,9 @@ interface Configuration {
   selectedDays: string;
   tags: string[];
   about: string;
+  age: string;
+  region: string;
+  language: string;
 }
 
 const initialState: Configuration = {
@@ -14,6 +17,9 @@ const initialState: Configuration = {
   selectedDays: '',
   tags: [],
   about: '',
+  age: '',
+  region: '',
+  language: '',
 };
 
 export const configurationSlice = createSlice({
@@ -41,6 +47,15 @@ export const configurationSlice = createSlice({
     setAbout: (state, { payload }: PayloadAction<string>) => {
       state.about = payload;
     },
+    setAge: (state, { payload }: PayloadAction<string>) => {
+      state.age = payload;
+    },
+    setRegion: (state, { payload }: PayloadAction<string>) => {
+      state.region = payload;
+    },
+    setLanguage: (state, { payload }: PayloadAction<string>) => {
+      state.language = payload;
+    },
   },
 });
 
@@ -52,5 +67,8 @@ export const {
   setTag,
   deleteTag,
   setAbout,
+  setAge,
+  setRegion,
+  setLanguage,
 } = configurationSlice.actions;
 export default configurationSlice.reducer;

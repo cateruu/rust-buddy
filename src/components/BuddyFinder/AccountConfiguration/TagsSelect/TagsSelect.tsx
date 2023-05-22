@@ -8,7 +8,7 @@ import {
   previousStep,
   setTag,
 } from '../../../../store/slices/configurationSlice';
-import Button from '../../../Button/Button';
+import Button from '../../../UI/Button/Button';
 
 const TagsSelect = () => {
   const { tags } = useAppSelector((state) => state.configuration);

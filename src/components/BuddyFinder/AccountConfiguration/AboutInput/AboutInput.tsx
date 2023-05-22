@@ -7,7 +7,7 @@ import {
   previousStep,
   setAbout,
 } from '../../../../store/slices/configurationSlice';
-import Button from '../../../Button/Button';
+import Button from '../../../UI/Button/Button';
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
