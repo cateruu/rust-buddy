@@ -5,6 +5,7 @@ interface Configuration {
   selectedHours: string;
   selectedDays: string;
   tags: string[];
+  about: string;
 }
 
 const initialState: Configuration = {
@@ -12,6 +13,7 @@ const initialState: Configuration = {
   selectedHours: '',
   selectedDays: '',
   tags: [],
+  about: '',
 };
 
 export const configurationSlice = createSlice({
@@ -36,6 +38,9 @@ export const configurationSlice = createSlice({
     deleteTag: (state, { payload }: PayloadAction<string>) => {
       state.tags = state.tags.filter((tag) => tag !== payload);
     },
+    setAbout: (state, { payload }: PayloadAction<string>) => {
+      state.about = payload;
+    },
   },
 });
 
@@ -46,5 +51,6 @@ export const {
   setSelectedDays,
   setTag,
   deleteTag,
+  setAbout,
 } = configurationSlice.actions;
 export default configurationSlice.reducer;
