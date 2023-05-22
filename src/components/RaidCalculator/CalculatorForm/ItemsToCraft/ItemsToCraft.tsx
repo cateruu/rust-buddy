@@ -1,22 +1,22 @@
 import Image from 'next/image';
 import styles from './ItemsToCraft.module.scss';
-import { ItemData } from '../../../../constants/items';
+import { ItemToCraft } from '../../../../constants/items';
 
 type Props = {
-  items: ItemData[];
-  onSelect: (selectedItem: ItemData) => void;
-  selectedItem: ItemData;
+  itemsToCraft: ItemToCraft[];
+  onSelect: (selectedItem: ItemToCraft) => void;
+  selectedItem: ItemToCraft;
 };
 
-const ItemsToCraft = ({ items, onSelect, selectedItem }: Props) => {
-  const setSelectedItemHandler = (selectedItem: ItemData) =>
+const ItemsToCraft = ({ onSelect, selectedItem, itemsToCraft }: Props) => {
+  const setSelectedItemHandler = (selectedItem: ItemToCraft) =>
     onSelect(selectedItem);
 
   return (
     <>
       <div className={styles.label}>Item to craft:</div>
       <div className={styles.items}>
-        {items.map((item) => (
+        {itemsToCraft.map((item) => (
           <div
             key={item.name}
             className={`${styles.item} ${

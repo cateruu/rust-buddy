@@ -1,13 +1,15 @@
 import ItemsToCraft from './ItemsToCraft/ItemsToCraft';
 import styles from './CalculatorForm.module.scss';
-import { ItemData, items } from '../../../constants/items';
+import { ItemToCraft, itemsToCraft } from '../../../constants/items';
 import Checkboxes from './Checkboxes/Checkboxes';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Inputs from './Inputs/Inputs';
 import Button from '../../UI/Button/Button';
 
 const CalculatorForm = () => {
-  const [selectedItem, setSelectedItem] = useState<ItemData>(items[0]);
+  const [selectedItem, setSelectedItem] = useState<ItemToCraft>(
+    itemsToCraft[0]
+  );
   const [selectedCheckbox, setSelectedCheckbox] = useState('ITEM_AMOUNT');
 
   const [itemAmount, setItemAmount] = useState(0);
@@ -23,7 +25,7 @@ const CalculatorForm = () => {
 
   const isEachInputEmpty = !itemAmount && !sulfurAmount && !gunPowderAmount;
 
-  const onItemSelect = (selectedItem: ItemData) =>
+  const onItemSelect = (selectedItem: ItemToCraft) =>
     setSelectedItem(selectedItem);
   const onCheckboxSelect = (selectedCheckbox: string) =>
     setSelectedCheckbox(selectedCheckbox);
@@ -100,7 +102,7 @@ const CalculatorForm = () => {
   return (
     <div className={styles.form}>
       <ItemsToCraft
-        items={items}
+        itemsToCraft={itemsToCraft}
         onSelect={onItemSelect}
         selectedItem={selectedItem}
       />
