@@ -22,6 +22,7 @@ interface User {
 
 interface UserContextType {
   user: User | null;
+  isUserLoading: boolean;
 }
 
 const UserContext = createContext<UserContextType>(null);
@@ -30,6 +31,7 @@ export const useUser = () => useContext(UserContext);
 
 const UserContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [isUserLoading, setIsUserLoading] = useState(true);
 
   useEffect(() => {
     const getUser = async () => {
@@ -38,6 +40,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
       if (!steamUser?.id) {
         setUser(null);
+        setIsUserLoading(false);
         return;
       }
 
@@ -57,6 +60,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
         createdAt: data[0].created_at,
         lastActivity: data[0].last_activity,
       });
+      setIsUserLoading(false);
     };
 
     getUser();
@@ -64,6 +68,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
   const contextValue: UserContextType = {
     user: user,
+    isUserLoading: isUserLoading,
   };
 
   return (
