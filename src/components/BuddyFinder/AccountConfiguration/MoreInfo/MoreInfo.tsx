@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './MoreInfo.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks';
 import {
+  nextStep,
   previousStep,
   setAge,
   setLanguage,
@@ -19,7 +20,7 @@ const MoreInfo = () => {
   const [ageError, setAgeError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const { user } = useUser();
+  const { user, refetchUser } = useUser();
   const router = useRouter();
 
   const { age, region, language, about, selectedDays, selectedHours, tags } =
@@ -73,6 +74,7 @@ const MoreInfo = () => {
       return;
     }
 
+    await refetchUser(user.id);
     toast.success('Configuration complete');
     setIsLoading(false);
     router.push('/buddy-finder/');
@@ -129,6 +131,7 @@ const MoreInfo = () => {
           variant='primary'
           width={100}
           disabled={!age || !region}
+          isLoading={isLoading}
         />
       </div>
     </div>

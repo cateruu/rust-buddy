@@ -23,6 +23,7 @@ interface User {
 interface UserContextType {
   user: User | null;
   isUserLoading: boolean;
+  refetchUser: (id: string) => void;
 }
 
 const UserContext = createContext<UserContextType>(null);
@@ -66,9 +67,31 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
     getUser();
   }, []);
 
+  const refetchUser = async (id: string) => {
+    const { data, error } = await supabase.from('users').select().eq('id', id);
+
+    if (error) {
+      setUser(null);
+      return;
+    }
+
+    setUser({
+      id: data[0].id,
+      steamId: data[0].steam_id,
+      steamUrl: data[0].steam_url,
+      displayName: data[0].displayName,
+      photo: data[0].photo,
+      country: data[0].country,
+      finderAccount: data[0].finder_account,
+      createdAt: data[0].created_at,
+      lastActivity: data[0].last_activity,
+    });
+  };
+
   const contextValue: UserContextType = {
     user: user,
     isUserLoading: isUserLoading,
+    refetchUser: refetchUser,
   };
 
   return (
