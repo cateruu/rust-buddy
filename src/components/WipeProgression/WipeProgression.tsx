@@ -86,7 +86,7 @@ const WipeProgression = () => {
     return () => {
       channel.unsubscribe();
     };
-  }, []);
+  }, [user.steamId]);
 
   return (
     <>
