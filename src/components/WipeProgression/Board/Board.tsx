@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './Board.module.scss';
 import { BoardType } from '../../../pages/wipe-progression/[id]';
-import Button from '../../Button/Button';
 import { ArrowBendUpLeft } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useUser } from '../../../hooks/useUser';
 import toast from 'react-hot-toast';
+import Button from '../../UI/Button/Button';
 
 interface Props {
   data: BoardType;

@@ -17,8 +17,8 @@ const Menu = ({ isVisible }: Props) => {
         <div className={styles.container}>
           <div className={styles.linksWrapper}>
             <Link href='/raid-calculator'>Raid Calculator</Link>
+            <Link href='/buddy-finder'>Buddy Finder</Link>
             <Link href='/wipe-progression'>Wipe Progression</Link>
-            <Link href='/coming-soon'>Coming Soon</Link>
           </div>
           {user ? (
             <UserInfo />
