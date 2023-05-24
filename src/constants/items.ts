@@ -23,13 +23,13 @@ const metalPipe = {
   image: '/item_images/metal_pipe.png',
 };
 
-interface Item {
+export interface Item {
   name: string;
   image: string;
 }
 
-interface ItemWithIngredients extends Item {
-  ingredients: { data: Item; quantity: number }[];
+export interface ItemWithIngredients extends Item {
+  ingredients: { data: Item | ItemWithIngredients; quantity: number }[];
   perCraft: number;
 }
 

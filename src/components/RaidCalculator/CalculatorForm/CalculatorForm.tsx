@@ -5,8 +5,13 @@ import Checkboxes from './Checkboxes/Checkboxes';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Inputs from './Inputs/Inputs';
 import Button from '../../UI/Button/Button';
+import { calcResult } from './CalculatorForm.helpers';
 
-const CalculatorForm = () => {
+type Props = {
+  onCalculate: () => void;
+};
+
+const CalculatorForm = ({ onCalculate }: Props) => {
   const [selectedItem, setSelectedItem] = useState<ItemToCraft>(
     itemsToCraft[0]
   );
@@ -90,7 +95,7 @@ const CalculatorForm = () => {
     return true;
   };
 
-  const onCalculate = () => {
+  const calculateResultHandler = () => {
     if (!areInputsValid()) return;
   };
 
@@ -121,7 +126,11 @@ const CalculatorForm = () => {
         gunPowderInputError={gunPowderInputError}
         itemInputError={itemInputError}
       />
-      <Button text='Calculate' variant='primary' onClick={onCalculate} />
+      <Button
+        text='Calculate'
+        variant='primary'
+        onClick={calculateResultHandler}
+      />
     </div>
   );
 };
