@@ -41,3 +41,24 @@ export const calcResult = (item: ItemToCraft, itemQuantity: number) => {
 
   return result;
 };
+
+export const getQuantityAvailialbeToCraft = (
+  item: ItemToCraft,
+  sulfurQuantity: number,
+  gunPowderQuantity: number
+) => {
+  const itemCostInSulfur = item.gunPowderPerCraft * 2 + item.sulfurPerCraft;
+  const ownedSulfur = sulfurQuantity + gunPowderQuantity * 2;
+
+  const maxQuantityToCraft = Math.floor(ownedSulfur / itemCostInSulfur);
+  if (!maxQuantityToCraft) return 0;
+
+  // cost in sulfur
+  const maxQuantityToCraftCost = item.sulfurPerCraft * maxQuantityToCraft;
+  if (sulfurQuantity > maxQuantityToCraftCost) return maxQuantityToCraft;
+
+  const quantityAvailialbeToCraft =
+    Math.floor(sulfurQuantity / item.sulfurPerCraft) * item.perCraft;
+
+  return quantityAvailialbeToCraft;
+};

@@ -73,6 +73,8 @@ const explosives: ItemWithIngredients = {
 export interface ItemToCraft extends Item {
   ingredients: { data: ItemWithIngredients | Item; quantity: number }[];
   perCraft: number;
+  gunPowderPerCraft: number;
+  sulfurPerCraft: number;
 }
 
 const rocket: ItemToCraft = {
@@ -93,6 +95,8 @@ const rocket: ItemToCraft = {
     },
   ],
   perCraft: 1,
+  gunPowderPerCraft: 650,
+  sulfurPerCraft: 100,
 };
 
 const explosiveAmmo: ItemToCraft = {
@@ -113,6 +117,8 @@ const explosiveAmmo: ItemToCraft = {
     },
   ],
   perCraft: 2,
+  gunPowderPerCraft: 20,
+  sulfurPerCraft: 10,
 };
 
 export const itemsToCraft = [rocket, explosiveAmmo];

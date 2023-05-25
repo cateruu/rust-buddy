@@ -5,7 +5,10 @@ import Checkboxes from './Checkboxes/Checkboxes';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Inputs from './Inputs/Inputs';
 import Button from '../../UI/Button/Button';
-import { calcResult } from './CalculatorForm.helpers';
+import {
+  calcResult,
+  getQuantityAvailialbeToCraft,
+} from './CalculatorForm.helpers';
 
 type Props = {
   onCalculate: () => void;
@@ -89,8 +92,9 @@ const CalculatorForm = ({ onCalculate }: Props) => {
 
       if (!gunPowderQuantity) {
         setGunPowderInputError(errorMsg);
-        return false;
       }
+
+      return !sulfurQuantity || !gunPowderQuantity ? false : true;
     }
 
     return true;
@@ -98,6 +102,14 @@ const CalculatorForm = ({ onCalculate }: Props) => {
 
   const calculateResultHandler = () => {
     if (!areInputsValid()) return;
+    /*     console.log(
+      getQuantityAvailialbeToCraft(
+        selectedItem,
+        sulfurQuantity,
+        gunPowderQuantity
+      )
+    ); */
+    console.log(calcResult(selectedItem, itemQuantity));
   };
 
   useEffect(() => {
