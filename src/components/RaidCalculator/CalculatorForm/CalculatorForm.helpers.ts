@@ -7,57 +7,37 @@ import {
 const hasOwnIngredients = (ingredientData: ItemWithIngredients | Item) =>
   ingredientData.hasOwnProperty('ingredients');
 
-const calcIngredientCost = (data: ItemWithIngredients, quantity: number) => {
-  const ingredientCost = [];
-  const { perCraft } = data as ItemWithIngredients;
+export const calcResult = (item: ItemToCraft, itemQuantity: number) => {
+  const result = [];
+  const itemCopy: ItemToCraft = JSON.parse(JSON.stringify(item));
+  const { perCraft } = itemCopy;
 
-  data.ingredients.forEach((ingredient) => {
-    const parentIngredientQuantity =
-      (ingredient.quantity / perCraft) * quantity;
+  itemCopy.ingredients.forEach((ingredientA) => {
+    ingredientA.quantity = (ingredientA.quantity / perCraft) * itemQuantity;
 
-    let nestedIngredientCost = [];
+    // calc all nested ingredients
+    if (hasOwnIngredients(ingredientA.data)) {
+      const { perCraft } = ingredientA.data as ItemWithIngredients;
 
-    if (hasOwnIngredients(ingredient.data)) {
-      const { perCraft } = ingredient.data as ItemWithIngredients;
-      (ingredient.data as ItemWithIngredients).ingredients.forEach(
-        (ingredient) => {
-          nestedIngredientCost.push({
-            data: ingredient.data,
-            quantity:
-              (ingredient.quantity / perCraft) * parentIngredientQuantity,
-          });
+      (ingredientA.data as ItemWithIngredients).ingredients.forEach(
+        (ingredientB) => {
+          ingredientB.quantity =
+            (ingredientB.quantity / perCraft) * ingredientA.quantity;
+
+          if (hasOwnIngredients(ingredientB.data)) {
+            const { perCraft } = ingredientB.data as ItemWithIngredients;
+            (ingredientB.data as ItemWithIngredients).ingredients.forEach(
+              (ingredientC) => {
+                ingredientC.quantity =
+                  (ingredientC.quantity / perCraft) * ingredientB.quantity;
+              }
+            );
+          }
         }
       );
     }
 
-    ingredientCost.push({
-      data: ingredient.data,
-      quantity: parentIngredientQuantity,
-      ingredientCost: nestedIngredientCost,
-    });
-  });
-
-  return ingredientCost;
-};
-
-export const calcResult = (item: ItemToCraft, enteredQuantity: number) => {
-  const result = [];
-
-  item.ingredients.forEach((ingredient) => {
-    const data = {
-      data: ingredient.data,
-      quantity: ingredient.quantity * enteredQuantity,
-    };
-
-    let ingredientCost = [];
-
-    if (hasOwnIngredients(ingredient.data))
-      ingredientCost = calcIngredientCost(
-        ingredient.data as ItemWithIngredients,
-        ingredient.quantity * enteredQuantity
-      );
-
-    result.push({ data, ingredientCost });
+    result.push(ingredientA);
   });
 
   return result;
