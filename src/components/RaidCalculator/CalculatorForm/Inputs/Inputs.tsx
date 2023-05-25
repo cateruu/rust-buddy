@@ -1,15 +1,18 @@
 import { ChangeEvent } from 'react';
-import { ItemData } from '../../../../constants/items';
 import Input from '../../../UI/Input/Input';
 import styles from './Inputs.module.scss';
+import { ItemToCraft } from '../../../../constants/items';
 
 type Props = {
   selectedCheckbox: string;
-  selectedItem: ItemData;
-  itemAmount: number;
-  sulfurAmount: number;
-  gunpowderAmount: number;
-  onAmountChange: (e: ChangeEvent<HTMLInputElement>, toChange: string) => void;
+  selectedItem: ItemToCraft;
+  itemQuantity: number;
+  sulfurQuantity: number;
+  gunpowderQuantity: number;
+  onQuantityChange: (
+    e: ChangeEvent<HTMLInputElement>,
+    toChange: string
+  ) => void;
   sulfurInputError: string;
   itemInputError: string;
   gunPowderInputError: string;
@@ -18,42 +21,42 @@ type Props = {
 const Inputs = ({
   selectedCheckbox,
   selectedItem,
-  itemAmount,
-  sulfurAmount,
-  gunpowderAmount,
-  onAmountChange,
+  itemQuantity,
+  sulfurQuantity,
+  gunpowderQuantity,
+  onQuantityChange,
   sulfurInputError,
   itemInputError,
   gunPowderInputError,
 }: Props) => {
   return (
     <div className={styles.inputs}>
-      {selectedCheckbox === 'ITEM_AMOUNT' && (
+      {selectedCheckbox === 'ITEM_QUANTITY' && (
         <Input
-          value={itemAmount}
-          onChange={(e) => onAmountChange(e, 'item')}
+          value={itemQuantity}
+          onChange={(e) => onQuantityChange(e, 'item')}
           withLabel
-          labelText={`${selectedItem.name} amount:`}
+          labelText={`${selectedItem.name} quantity:`}
           icon={`${selectedItem.image}`}
           error={itemInputError}
         />
       )}
 
-      {selectedCheckbox === 'RESOURCES_AMOUNT' && (
+      {selectedCheckbox === 'RESOURCES_QUANTITY' && (
         <>
           <Input
-            value={sulfurAmount}
-            onChange={(e) => onAmountChange(e, 'sulfur')}
+            value={sulfurQuantity}
+            onChange={(e) => onQuantityChange(e, 'sulfur')}
             withLabel
-            labelText='Sulfur amount:'
+            labelText='Sulfur quantity:'
             icon='/item_images/sulfur.png'
             error={sulfurInputError}
           />
           <Input
-            value={gunpowderAmount}
-            onChange={(e) => onAmountChange(e, 'gunpowder')}
+            value={gunpowderQuantity}
+            onChange={(e) => onQuantityChange(e, 'gunpowder')}
             withLabel
-            labelText='Gun powder amount:'
+            labelText='Gun powder quantity:'
             icon='/item_images/gun_powder.png'
             error={gunPowderInputError}
           />

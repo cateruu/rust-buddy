@@ -15,11 +15,11 @@ const CalculatorForm = ({ onCalculate }: Props) => {
   const [selectedItem, setSelectedItem] = useState<ItemToCraft>(
     itemsToCraft[0]
   );
-  const [selectedCheckbox, setSelectedCheckbox] = useState('ITEM_AMOUNT');
+  const [selectedCheckbox, setSelectedCheckbox] = useState('ITEM_QUANTITY');
 
-  const [itemAmount, setItemAmount] = useState(0);
-  const [sulfurAmount, setSulfurAmount] = useState(0);
-  const [gunPowderAmount, setGunPowderAmount] = useState(0);
+  const [itemQuantity, setItemQuantity] = useState(0);
+  const [sulfurQuantity, setSulfurQuantity] = useState(0);
+  const [gunPowderQuantity, setGunPowderQuantity] = useState(0);
 
   const [sulfurInputError, setSulfurInputError] = useState('');
   const [itemInputError, setItemInputError] = useState('');
@@ -28,7 +28,8 @@ const CalculatorForm = ({ onCalculate }: Props) => {
   const isThereAnInputError =
     sulfurInputError || itemInputError || gunPowderInputError ? true : false;
 
-  const isEachInputEmpty = !itemAmount && !sulfurAmount && !gunPowderAmount;
+  const isEachInputEmpty =
+    !itemQuantity && !sulfurQuantity && !gunPowderQuantity;
 
   const onItemSelect = (selectedItem: ItemToCraft) =>
     setSelectedItem(selectedItem);
@@ -42,51 +43,51 @@ const CalculatorForm = ({ onCalculate }: Props) => {
   };
 
   const resetInputValues = () => {
-    setItemAmount(0);
-    setSulfurAmount(0);
-    setGunPowderAmount(0);
+    setItemQuantity(0);
+    setSulfurQuantity(0);
+    setGunPowderQuantity(0);
   };
 
-  const onAmountChange = (
+  const onQuantityChange = (
     e: ChangeEvent<HTMLInputElement>,
     toChange: string
   ) => {
-    const amount = +e.target.value;
+    const quantity = +e.target.value;
 
-    if (isNaN(amount)) return;
-    if (amount > 1000000) return;
+    if (isNaN(quantity)) return;
+    if (quantity > 1000000) return;
 
     if (isThereAnInputError) resetInputErrors();
 
     if (toChange === 'item') {
-      setItemAmount(amount);
+      setItemQuantity(quantity);
       return;
     }
 
     if (toChange === 'sulfur') {
-      setSulfurAmount(amount);
+      setSulfurQuantity(quantity);
       return;
     }
 
     if (toChange === 'gunpowder') {
-      setGunPowderAmount(amount);
+      setGunPowderQuantity(quantity);
       return;
     }
   };
 
   const areInputsValid = () => {
     const errorMsg = 'Value must be greater than 0.';
-    if (!itemAmount && selectedCheckbox === 'ITEM_AMOUNT') {
+    if (!itemQuantity && selectedCheckbox === 'ITEM_QUANTITY') {
       setItemInputError(errorMsg);
       return false;
     }
 
-    if (selectedCheckbox === 'RESOURCES_AMOUNT') {
-      if (!sulfurAmount) {
+    if (selectedCheckbox === 'RESOURCES_QUANTITY') {
+      if (!sulfurQuantity) {
         setSulfurInputError(errorMsg);
       }
 
-      if (!gunPowderAmount) {
+      if (!gunPowderQuantity) {
         setGunPowderInputError(errorMsg);
         return false;
       }
@@ -118,10 +119,10 @@ const CalculatorForm = ({ onCalculate }: Props) => {
       <Inputs
         selectedCheckbox={selectedCheckbox}
         selectedItem={selectedItem}
-        itemAmount={itemAmount}
-        sulfurAmount={sulfurAmount}
-        gunpowderAmount={gunPowderAmount}
-        onAmountChange={onAmountChange}
+        itemQuantity={itemQuantity}
+        sulfurQuantity={sulfurQuantity}
+        gunpowderQuantity={gunPowderQuantity}
+        onQuantityChange={onQuantityChange}
         sulfurInputError={sulfurInputError}
         gunPowderInputError={gunPowderInputError}
         itemInputError={itemInputError}

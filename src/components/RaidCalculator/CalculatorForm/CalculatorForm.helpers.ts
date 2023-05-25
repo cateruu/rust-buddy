@@ -18,7 +18,6 @@ export const calcResult = (item: ItemToCraft, itemQuantity: number) => {
     // calc all nested ingredients
     if (hasOwnIngredients(ingredientA.data)) {
       const { perCraft } = ingredientA.data as ItemWithIngredients;
-
       (ingredientA.data as ItemWithIngredients).ingredients.forEach(
         (ingredientB) => {
           ingredientB.quantity =
