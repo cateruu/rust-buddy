@@ -1,11 +1,21 @@
 import styles from './Checkboxes.module.scss';
 
-type Props = {
-  onSelect: (selectedCheckbox: string) => void;
+export type CheckboxesData = {
   selectedCheckbox: string;
+  isMixingTableIncluded: boolean;
 };
 
-const Checkboxes = ({ onSelect, selectedCheckbox }: Props) => {
+type Props = {
+  onCheckboxSelect: (checkboxesData: {
+    selectedCheckbox: string;
+    isMixingTableIncluded: boolean;
+  }) => void;
+  checkboxesData: CheckboxesData;
+};
+
+const Checkboxes = ({ onCheckboxSelect, checkboxesData }: Props) => {
+  const { selectedCheckbox, isMixingTableIncluded } = checkboxesData;
+
   return (
     <>
       <div className={styles.label}>Base results on:</div>
@@ -16,7 +26,12 @@ const Checkboxes = ({ onSelect, selectedCheckbox }: Props) => {
             className={`${styles.checkbox} ${
               selectedCheckbox === 'RESOURCES_QUANTITY' && styles.checked
             }`}
-            onClick={() => onSelect('RESOURCES_QUANTITY')}
+            onClick={() =>
+              onCheckboxSelect({
+                selectedCheckbox: 'RESOURCES_QUANTITY',
+                isMixingTableIncluded,
+              })
+            }
           />
         </div>
         <div>
@@ -25,7 +40,26 @@ const Checkboxes = ({ onSelect, selectedCheckbox }: Props) => {
             className={`${styles.checkbox} ${
               selectedCheckbox === 'ITEM_QUANTITY' && styles.checked
             }`}
-            onClick={() => onSelect('ITEM_QUANTITY')}
+            onClick={() =>
+              onCheckboxSelect({
+                selectedCheckbox: 'ITEM_QUANTITY',
+                isMixingTableIncluded,
+              })
+            }
+          />
+        </div>
+        <div>
+          <div className={styles.text}>Include crafting using mixing table</div>
+          <div
+            className={`${styles.checkbox} ${
+              isMixingTableIncluded && styles.checked
+            }`}
+            onClick={() =>
+              onCheckboxSelect({
+                selectedCheckbox,
+                isMixingTableIncluded: !isMixingTableIncluded,
+              })
+            }
           />
         </div>
       </div>

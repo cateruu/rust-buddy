@@ -1,7 +1,7 @@
 import ItemsToCraft from './ItemsToCraft/ItemsToCraft';
 import styles from './CalculatorForm.module.scss';
 import { ItemToCraft, itemsToCraft } from '../../../constants/items';
-import Checkboxes from './Checkboxes/Checkboxes';
+import Checkboxes, { CheckboxesData } from './Checkboxes/Checkboxes';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Inputs from './Inputs/Inputs';
 import Button from '../../UI/Button/Button';
@@ -18,7 +18,10 @@ const CalculatorForm = ({ onCalculate }: Props) => {
   const [selectedItem, setSelectedItem] = useState<ItemToCraft>(
     itemsToCraft[0]
   );
-  const [selectedCheckbox, setSelectedCheckbox] = useState('ITEM_QUANTITY');
+  const [checkboxesData, setCheckboxesData] = useState({
+    selectedCheckbox: 'ITEM_QUANTITY',
+    isMixingTableIncluded: false,
+  });
 
   const [itemQuantity, setItemQuantity] = useState(0);
   const [sulfurQuantity, setSulfurQuantity] = useState(0);
@@ -36,8 +39,8 @@ const CalculatorForm = ({ onCalculate }: Props) => {
 
   const onItemSelect = (selectedItem: ItemToCraft) =>
     setSelectedItem(selectedItem);
-  const onCheckboxSelect = (selectedCheckbox: string) =>
-    setSelectedCheckbox(selectedCheckbox);
+  const onCheckboxSelect = (checkboxesData: CheckboxesData) =>
+    setCheckboxesData(checkboxesData);
 
   const resetInputErrors = () => {
     setGunPowderInputError('');
@@ -79,7 +82,9 @@ const CalculatorForm = ({ onCalculate }: Props) => {
   };
 
   const areInputsValid = () => {
+    const { selectedCheckbox } = checkboxesData;
     const errorMsg = 'Value must be greater than 0.';
+
     if (!itemQuantity && selectedCheckbox === 'ITEM_QUANTITY') {
       setItemInputError(errorMsg);
       return false;
@@ -102,20 +107,12 @@ const CalculatorForm = ({ onCalculate }: Props) => {
 
   const calculateResultHandler = () => {
     if (!areInputsValid()) return;
-    /*     console.log(
-      getQuantityAvailialbeToCraft(
-        selectedItem,
-        sulfurQuantity,
-        gunPowderQuantity
-      )
-    ); */
-    console.log(calcResult(selectedItem, itemQuantity));
   };
 
   useEffect(() => {
     if (isThereAnInputError) resetInputErrors();
     if (!isEachInputEmpty) resetInputValues();
-  }, [selectedCheckbox, selectedItem]);
+  }, [checkboxesData, selectedItem]);
 
   return (
     <div className={styles.form}>
@@ -125,11 +122,11 @@ const CalculatorForm = ({ onCalculate }: Props) => {
         selectedItem={selectedItem}
       />
       <Checkboxes
-        onSelect={onCheckboxSelect}
-        selectedCheckbox={selectedCheckbox}
+        onCheckboxSelect={onCheckboxSelect}
+        checkboxesData={checkboxesData}
       />
       <Inputs
-        selectedCheckbox={selectedCheckbox}
+        selectedCheckbox={checkboxesData.selectedCheckbox}
         selectedItem={selectedItem}
         itemQuantity={itemQuantity}
         sulfurQuantity={sulfurQuantity}

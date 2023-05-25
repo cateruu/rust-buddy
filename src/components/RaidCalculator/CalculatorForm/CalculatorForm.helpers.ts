@@ -7,7 +7,11 @@ import {
 const hasOwnIngredients = (ingredientData: ItemWithIngredients | Item) =>
   ingredientData.hasOwnProperty('ingredients');
 
-export const calcResult = (item: ItemToCraft, itemQuantity: number) => {
+export const calcResult = (
+  item: ItemToCraft,
+  itemQuantity: number,
+  isMixingTableIncluded: boolean
+) => {
   const result = [];
   const itemCopy: ItemToCraft = JSON.parse(JSON.stringify(item));
   const { perCraft } = itemCopy;
@@ -20,6 +24,9 @@ export const calcResult = (item: ItemToCraft, itemQuantity: number) => {
       const { perCraft } = ingredientA.data as ItemWithIngredients;
       (ingredientA.data as ItemWithIngredients).ingredients.forEach(
         (ingredientB) => {
+          if (ingredientB.data.name === 'charcoal' && isMixingTableIncluded)
+            ingredientB.quantity = 20;
+
           ingredientB.quantity =
             (ingredientB.quantity / perCraft) * ingredientA.quantity;
 
@@ -27,6 +34,12 @@ export const calcResult = (item: ItemToCraft, itemQuantity: number) => {
             const { perCraft } = ingredientB.data as ItemWithIngredients;
             (ingredientB.data as ItemWithIngredients).ingredients.forEach(
               (ingredientC) => {
+                if (
+                  ingredientC.data.name === 'charcoal' &&
+                  isMixingTableIncluded
+                )
+                  ingredientC.quantity = 20;
+
                 ingredientC.quantity =
                   (ingredientC.quantity / perCraft) * ingredientB.quantity;
               }
