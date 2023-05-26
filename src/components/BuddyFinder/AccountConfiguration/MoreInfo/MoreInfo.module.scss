@@ -64,6 +64,10 @@
   gap: 10px;
 }
 
+.region-wrapper {
+  display: flex;
+}
+
 .region {
   width: 44px;
   height: 44px;
@@ -96,4 +100,21 @@
   margin-top: 20px;
   display: flex;
   gap: 10px;
+}
+
+.tooltip-icon {
+  align-self: flex-end;
+  margin-bottom: 3px;
+}
+
+.tooltip {
+  background-color: var(--dark-bg) !important;
+  border: 1px solid var(--border);
+  font-size: 12px !important;
+  opacity: 0.99 !important;
+}
+
+.tooltip-text {
+  max-width: 200px;
+  color: var(--light-font);
 }
