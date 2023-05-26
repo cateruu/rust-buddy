@@ -32,7 +32,7 @@ const CalculatorForm = ({ onCalculate }: Props) => {
   const [gunPowderInputError, setGunPowderInputError] = useState('');
 
   const isThereAnInputError =
-    sulfurInputError || itemInputError || gunPowderInputError ? true : false;
+    sulfurInputError || itemInputError || gunPowderInputError;
 
   const isEachInputEmpty =
     !itemQuantity && !sulfurQuantity && !gunPowderQuantity;
@@ -99,7 +99,7 @@ const CalculatorForm = ({ onCalculate }: Props) => {
         setGunPowderInputError(errorMsg);
       }
 
-      return !sulfurQuantity || !gunPowderQuantity ? false : true;
+      return !sulfurQuantity || !gunPowderQuantity;
     }
 
     return true;
@@ -107,6 +107,13 @@ const CalculatorForm = ({ onCalculate }: Props) => {
 
   const calculateResultHandler = () => {
     if (!areInputsValid()) return;
+    console.log(
+      calcResult(
+        selectedItem,
+        itemQuantity,
+        checkboxesData.isMixingTableIncluded
+      )
+    );
   };
 
   useEffect(() => {

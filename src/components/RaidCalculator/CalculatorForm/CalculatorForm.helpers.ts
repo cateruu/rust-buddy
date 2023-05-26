@@ -4,6 +4,11 @@ import {
   ItemWithIngredients,
 } from '../../../constants/items';
 
+type ParentIngredient = {
+  data: ItemWithIngredients;
+  quantity: number;
+};
+
 const hasOwnIngredients = (ingredientData: ItemWithIngredients | Item) =>
   ingredientData.hasOwnProperty('ingredients');
 
@@ -19,36 +24,23 @@ export const calcResult = (
   itemCopy.ingredients.forEach((ingredientA) => {
     ingredientA.quantity = (ingredientA.quantity / perCraft) * itemQuantity;
 
-    // calc all nested ingredients
     if (hasOwnIngredients(ingredientA.data)) {
-      const { perCraft } = ingredientA.data as ItemWithIngredients;
-      (ingredientA.data as ItemWithIngredients).ingredients.forEach(
-        (ingredientB) => {
-          if (ingredientB.data.name === 'charcoal' && isMixingTableIncluded)
-            ingredientB.quantity = 20;
+      const calcNestedIngredients = (parentIngredient: ParentIngredient) => {
+        const { perCraft } = parentIngredient.data;
+        parentIngredient.data.ingredients.forEach((childIngredient) => {
+          if (childIngredient.data.name === 'charcoal' && isMixingTableIncluded)
+            childIngredient.quantity = 20;
 
-          ingredientB.quantity =
-            (ingredientB.quantity / perCraft) * ingredientA.quantity;
+          childIngredient.quantity =
+            (childIngredient.quantity / perCraft) * parentIngredient.quantity;
 
-          if (hasOwnIngredients(ingredientB.data)) {
-            const { perCraft } = ingredientB.data as ItemWithIngredients;
-            (ingredientB.data as ItemWithIngredients).ingredients.forEach(
-              (ingredientC) => {
-                if (
-                  ingredientC.data.name === 'charcoal' &&
-                  isMixingTableIncluded
-                )
-                  ingredientC.quantity = 20;
+          if (hasOwnIngredients(childIngredient.data))
+            calcNestedIngredients(childIngredient as ParentIngredient);
+        });
+      };
 
-                ingredientC.quantity =
-                  (ingredientC.quantity / perCraft) * ingredientB.quantity;
-              }
-            );
-          }
-        }
-      );
+      calcNestedIngredients(ingredientA as ParentIngredient);
     }
-
     result.push(ingredientA);
   });
 
