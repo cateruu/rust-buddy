@@ -4,13 +4,13 @@ import { ItemToCraft } from '../../../../constants/items';
 
 type Props = {
   itemsToCraft: ItemToCraft[];
-  onSelect: (selectedItem: ItemToCraft) => void;
+  onItemSelect: (selectedItem: ItemToCraft) => void;
   selectedItem: ItemToCraft;
 };
 
-const ItemsToCraft = ({ onSelect, selectedItem, itemsToCraft }: Props) => {
+const ItemsToCraft = ({ onItemSelect, selectedItem, itemsToCraft }: Props) => {
   const setSelectedItemHandler = (selectedItem: ItemToCraft) =>
-    onSelect(selectedItem);
+    onItemSelect(selectedItem);
 
   return (
     <>

@@ -21,28 +21,28 @@ const Checkboxes = ({ onCheckboxSelect, checkboxesData }: Props) => {
       <div className={styles.label}>Base results on:</div>
       <div className={styles.checkboxes}>
         <div>
-          <div className={styles.text}>Gunpowder and sulfur quantity</div>
+          <div className={styles.text}>Gunpowder and sulfur amount</div>
           <div
             className={`${styles.checkbox} ${
-              selectedCheckbox === 'RESOURCES_QUANTITY' && styles.checked
+              selectedCheckbox === 'RESOURCES_AMOUNT' && styles.checked
             }`}
             onClick={() =>
               onCheckboxSelect({
-                selectedCheckbox: 'RESOURCES_QUANTITY',
+                selectedCheckbox: 'RESOURCES_AMOUNT',
                 isMixingTableIncluded,
               })
             }
           />
         </div>
         <div>
-          <div className={styles.text}>Selected item quantity</div>
+          <div className={styles.text}>Selected item amount</div>
           <div
             className={`${styles.checkbox} ${
-              selectedCheckbox === 'ITEM_QUANTITY' && styles.checked
+              selectedCheckbox === 'ITEM_AMOUNT' && styles.checked
             }`}
             onClick={() =>
               onCheckboxSelect({
-                selectedCheckbox: 'ITEM_QUANTITY',
+                selectedCheckbox: 'ITEM_AMOUNT',
                 isMixingTableIncluded,
               })
             }

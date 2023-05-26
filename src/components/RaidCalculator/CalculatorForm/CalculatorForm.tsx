@@ -7,7 +7,7 @@ import Inputs from './Inputs/Inputs';
 import Button from '../../UI/Button/Button';
 import {
   calcResult,
-  getQuantityAvailialbeToCraft,
+  getAmountAvailialbeToCraft,
 } from './CalculatorForm.helpers';
 
 type Props = {
@@ -19,13 +19,15 @@ const CalculatorForm = ({ onCalculate }: Props) => {
     itemsToCraft[0]
   );
   const [checkboxesData, setCheckboxesData] = useState({
-    selectedCheckbox: 'ITEM_QUANTITY',
+    selectedCheckbox: 'ITEM_AMOUNT',
     isMixingTableIncluded: false,
   });
 
-  const [itemQuantity, setItemQuantity] = useState(0);
-  const [sulfurQuantity, setSulfurQuantity] = useState(0);
-  const [gunPowderQuantity, setGunPowderQuantity] = useState(0);
+  const { selectedCheckbox, isMixingTableIncluded } = checkboxesData;
+
+  const [itemAmount, setItemAmount] = useState(0);
+  const [sulfurAmount, setSulfurAmount] = useState(0);
+  const [gunPowderAmount, setGunPowderAmount] = useState(0);
 
   const [sulfurInputError, setSulfurInputError] = useState('');
   const [itemInputError, setItemInputError] = useState('');
@@ -34,12 +36,11 @@ const CalculatorForm = ({ onCalculate }: Props) => {
   const isThereAnInputError =
     sulfurInputError || itemInputError || gunPowderInputError;
 
-  const isEachInputEmpty =
-    !itemQuantity && !sulfurQuantity && !gunPowderQuantity;
+  const isEachInputEmpty = !itemAmount && !sulfurAmount && !gunPowderAmount;
 
-  const onItemSelect = (selectedItem: ItemToCraft) =>
+  const itemSelectHandler = (selectedItem: ItemToCraft) =>
     setSelectedItem(selectedItem);
-  const onCheckboxSelect = (checkboxesData: CheckboxesData) =>
+  const checkboxSelectHandler = (checkboxesData: CheckboxesData) =>
     setCheckboxesData(checkboxesData);
 
   const resetInputErrors = () => {
@@ -49,57 +50,49 @@ const CalculatorForm = ({ onCalculate }: Props) => {
   };
 
   const resetInputValues = () => {
-    setItemQuantity(0);
-    setSulfurQuantity(0);
-    setGunPowderQuantity(0);
+    setItemAmount(0);
+    setSulfurAmount(0);
+    setGunPowderAmount(0);
   };
 
-  const onQuantityChange = (
+  const amountChangeHandler = (
     e: ChangeEvent<HTMLInputElement>,
     toChange: string
   ) => {
-    const quantity = +e.target.value;
+    const amount = +e.target.value;
 
-    if (isNaN(quantity)) return;
-    if (quantity > 1000000) return;
+    if (isNaN(amount)) return;
+    if (amount > 1000000) return;
 
     if (isThereAnInputError) resetInputErrors();
 
-    if (toChange === 'item') {
-      setItemQuantity(quantity);
+    if (toChange === 'ITEM_AMOUNT') {
+      setItemAmount(amount);
       return;
     }
 
-    if (toChange === 'sulfur') {
-      setSulfurQuantity(quantity);
+    if (toChange === 'SULFUR_AMOUNT') {
+      setSulfurAmount(amount);
       return;
     }
 
-    if (toChange === 'gunpowder') {
-      setGunPowderQuantity(quantity);
+    if (toChange === 'GUN_POWDER_AMOUNT') {
+      setGunPowderAmount(amount);
       return;
     }
   };
 
   const areInputsValid = () => {
-    const { selectedCheckbox } = checkboxesData;
     const errorMsg = 'Value must be greater than 0.';
 
-    if (!itemQuantity && selectedCheckbox === 'ITEM_QUANTITY') {
+    if (!itemAmount && selectedCheckbox === 'ITEM_AMOUNT') {
       setItemInputError(errorMsg);
       return false;
     }
 
-    if (selectedCheckbox === 'RESOURCES_QUANTITY') {
-      if (!sulfurQuantity) {
-        setSulfurInputError(errorMsg);
-      }
-
-      if (!gunPowderQuantity) {
-        setGunPowderInputError(errorMsg);
-      }
-
-      return !sulfurQuantity || !gunPowderQuantity;
+    if (selectedCheckbox === 'RESOURCES_AMOUNT' && !sulfurAmount) {
+      setSulfurInputError(errorMsg);
+      return false;
     }
 
     return true;
@@ -107,38 +100,32 @@ const CalculatorForm = ({ onCalculate }: Props) => {
 
   const calculateResultHandler = () => {
     if (!areInputsValid()) return;
-    console.log(
-      calcResult(
-        selectedItem,
-        itemQuantity,
-        checkboxesData.isMixingTableIncluded
-      )
-    );
   };
 
   useEffect(() => {
     if (isThereAnInputError) resetInputErrors();
-    if (!isEachInputEmpty) resetInputValues();
-  }, [checkboxesData, selectedItem]);
+    if (!isEachInputEmpty && selectedCheckbox !== 'RESOURCES_AMOUNT')
+      resetInputValues();
+  }, [selectedCheckbox, selectedItem]);
 
   return (
     <div className={styles.form}>
       <ItemsToCraft
         itemsToCraft={itemsToCraft}
-        onSelect={onItemSelect}
+        onItemSelect={itemSelectHandler}
         selectedItem={selectedItem}
       />
       <Checkboxes
-        onCheckboxSelect={onCheckboxSelect}
+        onCheckboxSelect={checkboxSelectHandler}
         checkboxesData={checkboxesData}
       />
       <Inputs
-        selectedCheckbox={checkboxesData.selectedCheckbox}
+        selectedCheckbox={selectedCheckbox}
         selectedItem={selectedItem}
-        itemQuantity={itemQuantity}
-        sulfurQuantity={sulfurQuantity}
-        gunpowderQuantity={gunPowderQuantity}
-        onQuantityChange={onQuantityChange}
+        itemAmount={itemAmount}
+        sulfurAmount={sulfurAmount}
+        gunpowderAmount={gunPowderAmount}
+        onAmountChange={amountChangeHandler}
         sulfurInputError={sulfurInputError}
         gunPowderInputError={gunPowderInputError}
         itemInputError={itemInputError}

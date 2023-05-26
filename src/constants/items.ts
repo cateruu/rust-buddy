@@ -29,7 +29,7 @@ export interface Item {
 }
 
 export interface ItemWithIngredients extends Item {
-  ingredients: { data: Item | ItemWithIngredients; quantity: number }[];
+  ingredients: { data: Item | ItemWithIngredients; amount: number }[];
   perCraft: number;
 }
 
@@ -39,11 +39,11 @@ const gunPowder: ItemWithIngredients = {
   ingredients: [
     {
       data: sulfur,
-      quantity: 20,
+      amount: 20,
     },
     {
       data: charcoal,
-      quantity: 30,
+      amount: 30,
     },
   ],
   perCraft: 10,
@@ -55,23 +55,23 @@ const explosives: ItemWithIngredients = {
   ingredients: [
     {
       data: lowGradeFuel,
-      quantity: 3,
+      amount: 3,
     },
     {
       data: metalFragments,
-      quantity: 10,
+      amount: 10,
     },
-    { data: sulfur, quantity: 10 },
+    { data: sulfur, amount: 10 },
     {
       data: gunPowder,
-      quantity: 50,
+      amount: 50,
     },
   ],
   perCraft: 1,
 };
 
 export interface ItemToCraft extends Item {
-  ingredients: { data: ItemWithIngredients | Item; quantity: number }[];
+  ingredients: { data: ItemWithIngredients | Item; amount: number }[];
   perCraft: number;
   gunPowderPerCraft: number;
   sulfurPerCraft: number;
@@ -83,15 +83,15 @@ const rocket: ItemToCraft = {
   ingredients: [
     {
       data: explosives,
-      quantity: 10,
+      amount: 10,
     },
     {
       data: gunPowder,
-      quantity: 150,
+      amount: 150,
     },
     {
       data: metalPipe,
-      quantity: 2,
+      amount: 2,
     },
   ],
   perCraft: 1,
@@ -105,15 +105,15 @@ const explosiveAmmo: ItemToCraft = {
   ingredients: [
     {
       data: sulfur,
-      quantity: 10,
+      amount: 10,
     },
     {
       data: metalFragments,
-      quantity: 10,
+      amount: 10,
     },
     {
       data: gunPowder,
-      quantity: 20,
+      amount: 20,
     },
   ],
   perCraft: 2,

@@ -6,7 +6,7 @@ import {
 
 type ParentIngredient = {
   data: ItemWithIngredients;
-  quantity: number;
+  amount: number;
 };
 
 const hasOwnIngredients = (ingredientData: ItemWithIngredients | Item) =>
@@ -14,56 +14,59 @@ const hasOwnIngredients = (ingredientData: ItemWithIngredients | Item) =>
 
 export const calcResult = (
   item: ItemToCraft,
-  itemQuantity: number,
+  itemAmount: number,
   isMixingTableIncluded: boolean
 ) => {
   const result = [];
   const itemCopy: ItemToCraft = JSON.parse(JSON.stringify(item));
   const { perCraft } = itemCopy;
 
-  itemCopy.ingredients.forEach((ingredientA) => {
-    ingredientA.quantity = (ingredientA.quantity / perCraft) * itemQuantity;
+  if (itemAmount < perCraft) itemAmount = perCraft;
 
-    if (hasOwnIngredients(ingredientA.data)) {
+  itemCopy.ingredients.forEach((primaryIngredient) => {
+    primaryIngredient.amount =
+      (primaryIngredient.amount / perCraft) * itemAmount;
+
+    if (hasOwnIngredients(primaryIngredient.data)) {
       const calcNestedIngredients = (parentIngredient: ParentIngredient) => {
         const { perCraft } = parentIngredient.data;
         parentIngredient.data.ingredients.forEach((childIngredient) => {
           if (childIngredient.data.name === 'charcoal' && isMixingTableIncluded)
-            childIngredient.quantity = 20;
+            childIngredient.amount = 20;
 
-          childIngredient.quantity =
-            (childIngredient.quantity / perCraft) * parentIngredient.quantity;
+          childIngredient.amount =
+            (childIngredient.amount / perCraft) * parentIngredient.amount;
 
           if (hasOwnIngredients(childIngredient.data))
             calcNestedIngredients(childIngredient as ParentIngredient);
         });
       };
 
-      calcNestedIngredients(ingredientA as ParentIngredient);
+      calcNestedIngredients(primaryIngredient as ParentIngredient);
     }
-    result.push(ingredientA);
+    result.push(primaryIngredient);
   });
 
   return result;
 };
 
-export const getQuantityAvailialbeToCraft = (
+export const getAmountAvailialbeToCraft = (
   item: ItemToCraft,
-  sulfurQuantity: number,
-  gunPowderQuantity: number
+  sulfurAmount: number,
+  gunPowderAmount: number
 ) => {
   const itemCostInSulfur = item.gunPowderPerCraft * 2 + item.sulfurPerCraft;
-  const ownedSulfur = sulfurQuantity + gunPowderQuantity * 2;
+  const ownedSulfur = sulfurAmount + gunPowderAmount * 2;
 
-  const maxQuantityToCraft = Math.floor(ownedSulfur / itemCostInSulfur);
-  if (!maxQuantityToCraft) return 0;
+  const maxAmountToCraft = Math.floor(ownedSulfur / itemCostInSulfur);
+  if (!maxAmountToCraft) return 0;
 
   // cost in sulfur
-  const maxQuantityToCraftCost = item.sulfurPerCraft * maxQuantityToCraft;
-  if (sulfurQuantity > maxQuantityToCraftCost) return maxQuantityToCraft;
+  const maxAmountToCraftCost = item.sulfurPerCraft * maxAmountToCraft;
+  if (sulfurAmount > maxAmountToCraftCost) return maxAmountToCraft;
 
-  const quantityAvailialbeToCraft =
-    Math.floor(sulfurQuantity / item.sulfurPerCraft) * item.perCraft;
+  const amountAvailialbeToCraft =
+    Math.floor(sulfurAmount / item.sulfurPerCraft) * item.perCraft;
 
-  return quantityAvailialbeToCraft;
+  return amountAvailialbeToCraft;
 };
