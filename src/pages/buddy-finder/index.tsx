@@ -24,9 +24,9 @@ const BuddyFinderPage = () => {
       <main className={styles.main}>
         {user ? (
           user.finderAccount ? (
-            <AccountConfiguration />
-          ) : (
             <div>content</div>
+          ) : (
+            <AccountConfiguration />
           )
         ) : (
           <div className={styles.container}>

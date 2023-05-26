@@ -76,10 +76,9 @@ const MoreInfo = () => {
       return;
     }
 
-    await refetchUser(user.id);
+    refetchUser(user.id);
     toast.success('Configuration complete');
     setIsLoading(false);
-    router.push('/buddy-finder/');
   };
 
   return (
