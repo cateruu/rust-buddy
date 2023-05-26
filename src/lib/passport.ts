@@ -54,7 +54,7 @@ passport.use(
             country: profile._json.loccountrycode,
             last_activity: new Date(),
           })
-          .eq('id', profile.id);
+          .eq('steam_id', profile.id);
 
         if (updateError) console.error('update user error ->', updateError);
       } else {
