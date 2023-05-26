@@ -15,6 +15,8 @@ import { supabase } from '../../../../lib/supabase';
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../../../hooks/useUser';
 import { useRouter } from 'next/router';
+import { Tooltip } from 'react-tooltip';
+import { Question } from '@phosphor-icons/react';
 
 const MoreInfo = () => {
   const [ageError, setAgeError] = useState('');
@@ -74,10 +76,9 @@ const MoreInfo = () => {
       return;
     }
 
-    await refetchUser(user.id);
+    refetchUser(user.id);
     toast.success('Configuration complete');
     setIsLoading(false);
-    router.push('/buddy-finder/');
   };
 
   return (
@@ -98,7 +99,31 @@ const MoreInfo = () => {
         </div>
         <p className={styles.error}>{ageError}</p>
       </div>
-      <h4 className={styles.header}>Region</h4>
+      <div className={styles['region-wrapper']}>
+        <h4 className={styles.header}>Region</h4>
+        <Question
+          className={styles['tooltip-icon']}
+          id='tooltip-region'
+          color='#4C4946'
+          style={{ marginLeft: '5px' }}
+        />
+      </div>
+      <Tooltip anchorSelect='#tooltip-region' className={styles.tooltip}>
+        <p className={styles['tooltip-text']}>
+          <b>NA</b> - North America
+          <br />
+          <b>SA</b> - South America
+          <br />
+          <b>EU</b> - Europe
+          <br />
+          <b>AS</b> - Asia
+          <br />
+          <b>OC</b> - Oceania
+          <br />
+          <b>AF</b> - Africa
+          <br />
+        </p>
+      </Tooltip>
       <div className={styles['regions-wrapper']}>
         {regions.map((regionItem) => (
           <div
@@ -112,6 +137,18 @@ const MoreInfo = () => {
           </div>
         ))}
       </div>
+      <Tooltip anchorSelect='#tooltip-language' className={styles.tooltip}>
+        <p className={styles['tooltip-text']}>
+          Default language is English.
+          <br />
+          Selected language will have a higher priority.
+        </p>
+      </Tooltip>
+      <Question
+        className={styles['tooltip-icon']}
+        id='tooltip-language'
+        color='#4C4946'
+      />
       <Select
         placeholder='Select language'
         items={languages}
