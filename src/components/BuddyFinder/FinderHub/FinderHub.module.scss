@@ -1,0 +1,95 @@
+@use '../../../styles/mixins' as *;
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.links-wrapper {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+
+  @include tablet {
+    width: 90%;
+  }
+
+  @include tabletS {
+    flex-direction: column;
+    width: 60%;
+  }
+
+  @include mobileL {
+    width: 90%;
+  }
+}
+
+.link {
+  width: 300px;
+  aspect-ratio: 1 / 1;
+  border: 3px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: 0.15s;
+
+  &:hover {
+    border-color: var(--red);
+  }
+
+  @include tablet {
+    width: 250px;
+  }
+
+  @include tabletS {
+    width: 100%;
+    height: 200px;
+  }
+
+  @include mobile {
+    height: 150px;
+  }
+}
+
+.imageOpacity {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30, 0.7);
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.linkImage {
+  height: 100%;
+  object-fit: cover;
+  transition: 0.15s;
+
+  .link:hover & {
+    scale: 1.1;
+  }
+}
+
+.linkName {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 50px;
+  z-index: 3;
+  display: grid;
+  align-content: center;
+  text-align: center;
+
+  @include tablet {
+    font-size: 40px;
+  }
+}

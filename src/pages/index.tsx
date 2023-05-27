@@ -8,17 +8,17 @@ const links = [
   {
     name: 'raid calculator',
     path: '/raid-calculator',
-    image: '/raid_thumbnail.jpg',
+    image: '/raid_thumbnail.webp',
   },
   {
     name: 'buddy finder',
     path: '/buddy-finder',
-    image: '/buddy_finder.jpeg',
+    image: '/buddy_finder.webp',
   },
   {
     name: 'wipe progression',
     path: '/wipe-progression',
-    image: '/wipe_progression_thumbnail.png',
+    image: '/wipe_progression_thumbnail.webp',
   },
 ];
 

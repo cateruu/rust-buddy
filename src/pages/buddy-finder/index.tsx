@@ -5,6 +5,7 @@ import styles from './BuddyFinder.module.scss';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AccountConfiguration from '../../components/BuddyFinder/AccountConfiguration/AccountConfiguration';
+import FinderHub from '../../components/BuddyFinder/FinderHub/FinderHub';
 
 const BuddyFinderPage = () => {
   const { user } = useUser();
@@ -24,7 +25,7 @@ const BuddyFinderPage = () => {
       <main className={styles.main}>
         {user ? (
           user.finderAccount ? (
-            <div>content</div>
+            <FinderHub />
           ) : (
             <AccountConfiguration />
           )
