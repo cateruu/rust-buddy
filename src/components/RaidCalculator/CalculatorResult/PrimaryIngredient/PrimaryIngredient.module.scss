@@ -1,0 +1,27 @@
+.medium-text {
+  font-weight: 500;
+  color: var(--light-font);
+}
+
+.primary-ingredient {
+  background: var(--border);
+  display: flex;
+  padding: 0 2rem;
+}
+
+.image {
+  margin-right: 0.5rem;
+  position: relative;
+  height: 3rem;
+  width: 3rem;
+  & img {
+    object-fit: contain;
+  }
+}
+
+.data {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

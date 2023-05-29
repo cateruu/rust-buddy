@@ -6,12 +6,13 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import Inputs from './Inputs/Inputs';
 import Button from '../../UI/Button/Button';
 import {
+  Result,
   calcResult,
   getAmountAvailialbeToCraft,
 } from './CalculatorForm.helpers';
 
 type Props = {
-  onCalculate: () => void;
+  onCalculate: (result: Result) => void;
 };
 
 const CalculatorForm = ({ onCalculate }: Props) => {
@@ -100,6 +101,7 @@ const CalculatorForm = ({ onCalculate }: Props) => {
 
   const calculateResultHandler = () => {
     if (!areInputsValid()) return;
+    onCalculate(calcResult(selectedItem, itemAmount, isMixingTableIncluded));
   };
 
   useEffect(() => {

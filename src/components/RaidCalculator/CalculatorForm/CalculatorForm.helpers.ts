@@ -3,22 +3,36 @@ import {
   ItemToCraft,
   ItemWithIngredients,
 } from '../../../constants/items';
+import { hasOwnIngredients } from '../RaidCalculator.helpers';
 
 type ParentIngredient = {
   data: ItemWithIngredients;
   amount: number;
 };
 
-const hasOwnIngredients = (ingredientData: ItemWithIngredients | Item) =>
-  ingredientData.hasOwnProperty('ingredients');
+export type Result = {
+  itemName: string;
+  itemImage: string;
+  itemAmount: number;
+  ingredients: {
+    data: ItemWithIngredients | Item;
+    amount: number;
+  }[];
+};
 
 export const calcResult = (
   item: ItemToCraft,
   itemAmount: number,
   isMixingTableIncluded: boolean
 ) => {
-  const result = [];
   const itemCopy: ItemToCraft = JSON.parse(JSON.stringify(item));
+  const result = {
+    itemName: itemCopy.name,
+    itemImage: itemCopy.image,
+    itemAmount,
+    ingredients: itemCopy.ingredients,
+  };
+
   const { perCraft } = itemCopy;
 
   if (itemAmount < perCraft) itemAmount = perCraft;
@@ -44,7 +58,6 @@ export const calcResult = (
 
       calcNestedIngredients(primaryIngredient as ParentIngredient);
     }
-    result.push(primaryIngredient);
   });
 
   return result;

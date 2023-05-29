@@ -1,0 +1,35 @@
+.nested-ingredients {
+  padding: 0.5rem 0;
+}
+
+.ingredient {
+  display: flex;
+  padding: 0 2rem;
+  margin: -0.25rem 0;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--dark-font);
+}
+
+.data {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.parent-ingredient {
+  background-color: var(--border);
+  color: var(--light-font);
+  margin: 0.5rem 0;
+}
+
+.image {
+  margin-right: 1.5rem;
+  position: relative;
+  height: 1.8rem;
+  width: 1.8rem;
+  & img {
+    display: flex;
+    object-fit: contain;
+  }
+}

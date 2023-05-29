@@ -18,9 +18,14 @@ const metalFragments = {
   image: '/item_images/metal_fragments.png',
 };
 
-const metalPipe = {
-  name: 'metal pipe',
-  image: '/item_images/metal_pipe.png',
+const highQualityMetal = {
+  name: 'high quality metal',
+  image: '/item_images/high_quality_metal.webp',
+};
+
+const scrap = {
+  name: 'scrap',
+  image: '/item_images/scrap.webp',
 };
 
 export interface Item {
@@ -35,7 +40,7 @@ export interface ItemWithIngredients extends Item {
 
 const gunPowder: ItemWithIngredients = {
   name: 'gun powder',
-  image: '/item_images/gun_powder.png',
+  image: '/item_images/gun_powder.webp',
   ingredients: [
     {
       data: sulfur,
@@ -65,6 +70,22 @@ const explosives: ItemWithIngredients = {
     {
       data: gunPowder,
       amount: 50,
+    },
+  ],
+  perCraft: 1,
+};
+
+const metalPipe: ItemWithIngredients = {
+  name: 'metal pipe',
+  image: '/item_images/metal_pipe.png',
+  ingredients: [
+    {
+      data: scrap,
+      amount: 20,
+    },
+    {
+      data: highQualityMetal,
+      amount: 2,
     },
   ],
   perCraft: 1,

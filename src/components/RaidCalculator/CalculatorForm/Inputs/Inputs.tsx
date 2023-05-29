@@ -54,7 +54,7 @@ const Inputs = ({
             onChange={(e) => onAmountChange(e, 'GUN_POWDER_AMOUNT')}
             withLabel
             labelText='Gun powder amount:'
-            icon='/item_images/gun_powder.png'
+            icon='/item_images/gun_powder.webp'
             error={gunPowderInputError}
           />
         </>
