@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Item, ItemWithIngredients } from '../../../../constants/items';
+import { Ingredient } from '../../../../constants/items';
 import styles from './PrimaryIngredient.module.scss';
 import NestedIngredients from './NestedIngredients/NestedIngredients';
 import {
@@ -8,7 +8,7 @@ import {
 } from '../../RaidCalculator.helpers';
 
 type Props = {
-  primaryIngredient: { data: ItemWithIngredients | Item; amount: number };
+  primaryIngredient: { data: Ingredient; amount: number };
 };
 
 const PrimaryIngredient = ({ primaryIngredient }: Props) => {
@@ -29,9 +29,7 @@ const PrimaryIngredient = ({ primaryIngredient }: Props) => {
         </div>
       </div>
       {hasOwnIngredients(primaryIngredient.data) && (
-        <NestedIngredients
-          primaryIngredient={primaryIngredient.data as ItemWithIngredients}
-        />
+        <NestedIngredients primaryIngredient={primaryIngredient.data} />
       )}
     </>
   );

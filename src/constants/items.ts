@@ -1,3 +1,13 @@
+export interface Ingredient {
+  name: string;
+  image: string;
+  ingredients?: {
+    data: Ingredient;
+    amount: number;
+  }[];
+  perCraft?: number;
+}
+
 const sulfur = {
   name: 'sulfur',
   image: '/item_images/sulfur.png',
@@ -28,17 +38,7 @@ const scrap = {
   image: '/item_images/scrap.webp',
 };
 
-export interface Item {
-  name: string;
-  image: string;
-}
-
-export interface ItemWithIngredients extends Item {
-  ingredients: { data: Item | ItemWithIngredients; amount: number }[];
-  perCraft: number;
-}
-
-const gunPowder: ItemWithIngredients = {
+const gunPowder: Ingredient = {
   name: 'gun powder',
   image: '/item_images/gun_powder.webp',
   ingredients: [
@@ -54,7 +54,7 @@ const gunPowder: ItemWithIngredients = {
   perCraft: 10,
 };
 
-const explosives: ItemWithIngredients = {
+const explosives: Ingredient = {
   name: 'explosives',
   image: '/item_images/explosives.png',
   ingredients: [
@@ -75,7 +75,7 @@ const explosives: ItemWithIngredients = {
   perCraft: 1,
 };
 
-const metalPipe: ItemWithIngredients = {
+const metalPipe: Ingredient = {
   name: 'metal pipe',
   image: '/item_images/metal_pipe.png',
   ingredients: [
@@ -91,9 +91,7 @@ const metalPipe: ItemWithIngredients = {
   perCraft: 1,
 };
 
-export interface ItemToCraft extends Item {
-  ingredients: { data: ItemWithIngredients | Item; amount: number }[];
-  perCraft: number;
+export interface ItemToCraft extends Ingredient {
   gunPowderPerCraft: number;
   sulfurPerCraft: number;
 }

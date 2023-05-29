@@ -1,6 +1,6 @@
-import { Item, ItemWithIngredients } from '../../constants/items';
+import { Ingredient } from '../../constants/items';
 
-export const hasOwnIngredients = (ingredient: ItemWithIngredients | Item) =>
+export const hasOwnIngredients = (ingredient: Ingredient) =>
   ingredient.hasOwnProperty('ingredients');
 
 export const capitalizeName = (name: string) =>

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Item, ItemWithIngredients } from '../../../../../constants/items';
+import { Ingredient } from '../../../../../constants/items';
 import styles from './NestedIngredients.module.scss';
 import {
   capitalizeName,
@@ -7,7 +7,7 @@ import {
 } from '../../../RaidCalculator.helpers';
 
 type Props = {
-  primaryIngredient: ItemWithIngredients;
+  primaryIngredient: Ingredient;
 };
 
 const NestedIngredients = ({ primaryIngredient }: Props) => {
@@ -36,25 +36,23 @@ const NestedIngredients = ({ primaryIngredient }: Props) => {
               </div>
             </div>
             {hasOwnIngredients(ingredient.data) &&
-              (ingredient.data as ItemWithIngredients).ingredients.map(
-                (ingredient) => {
-                  const {
-                    data: { image, name },
-                    amount,
-                  } = ingredient;
-                  return (
-                    <div className={styles.ingredient}>
-                      <div className={styles.image}>
-                        <Image src={image} alt={name} fill />
-                      </div>
-                      <div className={styles.data}>
-                        <span>{capitalizeName(name)}</span>
-                        <span>{amount}</span>
-                      </div>
+              ingredient.data.ingredients.map((ingredient) => {
+                const {
+                  data: { image, name },
+                  amount,
+                } = ingredient;
+                return (
+                  <div className={styles.ingredient}>
+                    <div className={styles.image}>
+                      <Image src={image} alt={name} fill />
                     </div>
-                  );
-                }
-              )}
+                    <div className={styles.data}>
+                      <span>{capitalizeName(name)}</span>
+                      <span>{amount}</span>
+                    </div>
+                  </div>
+                );
+              })}
           </>
         );
       })}

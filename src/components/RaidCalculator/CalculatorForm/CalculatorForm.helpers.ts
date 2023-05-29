@@ -1,12 +1,8 @@
-import {
-  Item,
-  ItemToCraft,
-  ItemWithIngredients,
-} from '../../../constants/items';
+import { Ingredient, ItemToCraft } from '../../../constants/items';
 import { hasOwnIngredients } from '../RaidCalculator.helpers';
 
 type ParentIngredient = {
-  data: ItemWithIngredients;
+  data: Ingredient;
   amount: number;
 };
 
@@ -15,7 +11,7 @@ export type Result = {
   itemImage: string;
   itemAmount: number;
   ingredients: {
-    data: ItemWithIngredients | Item;
+    data: Ingredient;
     amount: number;
   }[];
 };
