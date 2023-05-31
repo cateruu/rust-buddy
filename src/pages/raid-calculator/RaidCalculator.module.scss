@@ -1,7 +1,9 @@
-// Temporary
+@use '../../styles/mixins' as *;
+
 .raid-calculator {
   margin: auto;
-  width: 50rem;
+  max-width: 45rem;
+  padding: 0 1.5rem;
 }
 
 .heading {
@@ -19,4 +21,9 @@
 
 .calculator-container {
   display: flex;
+  column-gap: 2rem;
+
+  @include tabletS {
+    flex-direction: column;
+  }
 }

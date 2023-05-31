@@ -20,7 +20,7 @@ const Checkboxes = ({ onCheckboxSelect, checkboxesData }: Props) => {
     <>
       <div className={styles.label}>Base results on:</div>
       <div className={styles.checkboxes}>
-        <div>
+        <div className={styles['checkbox-container']}>
           <div className={styles.text}>Gunpowder and sulfur amount</div>
           <div
             className={`${styles.checkbox} ${
@@ -34,7 +34,7 @@ const Checkboxes = ({ onCheckboxSelect, checkboxesData }: Props) => {
             }
           />
         </div>
-        <div>
+        <div className={styles['checkbox-container']}>
           <div className={styles.text}>Selected item amount</div>
           <div
             className={`${styles.checkbox} ${
@@ -48,7 +48,7 @@ const Checkboxes = ({ onCheckboxSelect, checkboxesData }: Props) => {
             }
           />
         </div>
-        <div>
+        <div className={styles['checkbox-container-margin']}>
           <div className={styles.text}>Include crafting using mixing table</div>
           <div
             className={`${styles.checkbox} ${

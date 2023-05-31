@@ -1,5 +1,7 @@
 .label {
-  margin-bottom: 1rem;
+  margin: 1rem 0;
+  font-weight: 500;
+  color: var(--light-font);
 }
 
 .checkboxes > div {
@@ -8,11 +10,24 @@
   margin-bottom: 0.5rem;
 }
 
+.checkbox-container {
+  display: flex;
+  justify-content: space-between;
+
+  &-margin {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 .checkbox {
   cursor: pointer;
   height: 1.5rem;
   width: 1.5rem;
   background: var(--dark-bg);
+  margin-left: 1rem;
+  flex-shrink: 0;
 }
 
 .checked {

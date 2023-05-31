@@ -11,7 +11,7 @@ interface Props {
   text: string;
   variant: 'primary' | 'secondary';
   onClick: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  width?: number;
+  width?: number | string;
 }
 
 const Button = ({ text, variant, width, onClick }: Props) => {

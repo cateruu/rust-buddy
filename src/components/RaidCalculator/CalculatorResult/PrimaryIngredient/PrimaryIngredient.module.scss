@@ -1,6 +1,11 @@
+@use '../../../../styles/mixins' as *;
+
 .medium-text {
   font-weight: 500;
   color: var(--light-font);
+  @include mobile {
+    font-size: 0.875rem;
+  }
 }
 
 .primary-ingredient {
@@ -24,4 +29,5 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  column-gap: 1rem;
 }

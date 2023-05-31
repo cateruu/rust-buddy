@@ -111,7 +111,7 @@ const CalculatorForm = ({ onCalculate }: Props) => {
   }, [selectedCheckbox, selectedItem]);
 
   return (
-    <div className={styles.form}>
+    <div className={styles['calculator-form']}>
       <ItemsToCraft
         itemsToCraft={itemsToCraft}
         onItemSelect={itemSelectHandler}
@@ -136,6 +136,7 @@ const CalculatorForm = ({ onCalculate }: Props) => {
         text='Calculate'
         variant='primary'
         onClick={calculateResultHandler}
+        width={'100%'}
       />
     </div>
   );

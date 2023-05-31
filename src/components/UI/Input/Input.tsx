@@ -38,7 +38,7 @@ const Input = ({
           className={styles.input}
           value={value}
           onChange={onChange}
-          style={{ minWidth: width ? width : '300px' }}
+          style={{ width: width ? width : '300px' }}
         />
       </div>
       {error && <p className={styles['error-text']}>{error}</p>}

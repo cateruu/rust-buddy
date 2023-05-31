@@ -8,6 +8,14 @@ type Props = {
 };
 
 const CalculatorResult = ({ result }: Props) => {
+  if (!result) {
+    return (
+      <div className={styles['calculator-result']}>
+        <p className={styles['placeholder-text']}>Result will be shown here.</p>
+      </div>
+    );
+  }
+
   const { itemName, itemAmount, ingredients } = result;
 
   return (
@@ -15,8 +23,7 @@ const CalculatorResult = ({ result }: Props) => {
       <div className={styles.result}>
         <div className={styles['medium-text']}>You want to craft:</div>
         <span>
-          {itemAmount}{' '}
-          {`${capitalizeName(itemName)}${itemAmount > 1 ? 's' : ''}`}
+          {itemAmount} {`${capitalizeName(itemName)}`}
         </span>
       </div>
       <div className={styles.ingredients}>
