@@ -10,22 +10,22 @@ export interface Ingredient {
 
 const sulfur = {
   name: 'sulfur',
-  image: '/item_images/sulfur.png',
+  image: '/item_images/sulfur.webp',
 };
 
 const charcoal = {
   name: 'charcoal',
-  image: '/item_images/charcoal.png',
+  image: '/item_images/charcoal.webp',
 };
 
 const lowGradeFuel = {
   name: 'low grade fuel',
-  image: '/item_images/low_grade_fuel.png',
+  image: '/item_images/low_grade_fuel.webp',
 };
 
 const metalFragments = {
   name: 'metal fragments',
-  image: '/item_images/metal_fragments.png',
+  image: '/item_images/metal_fragments.webp',
 };
 
 const highQualityMetal = {
@@ -56,7 +56,7 @@ const gunPowder: Ingredient = {
 
 const explosives: Ingredient = {
   name: 'explosives',
-  image: '/item_images/explosives.png',
+  image: '/item_images/explosives.webp',
   ingredients: [
     {
       data: lowGradeFuel,
@@ -77,7 +77,7 @@ const explosives: Ingredient = {
 
 const metalPipe: Ingredient = {
   name: 'metal pipe',
-  image: '/item_images/metal_pipe.png',
+  image: '/item_images/metal_pipe.webp',
   ingredients: [
     {
       data: scrap,
@@ -98,7 +98,7 @@ export interface ItemToCraft extends Ingredient {
 
 const rocket: ItemToCraft = {
   name: 'rocket',
-  image: '/item_images/rocket.png',
+  image: '/item_images/rocket.webp',
   ingredients: [
     {
       data: explosives,
@@ -120,7 +120,7 @@ const rocket: ItemToCraft = {
 
 const explosiveAmmo: ItemToCraft = {
   name: 'explosive ammo',
-  image: '/item_images/explosive_ammo.png',
+  image: '/item_images/explosive_ammo.webp',
   ingredients: [
     {
       data: sulfur,
