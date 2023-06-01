@@ -1,8 +1,8 @@
-import { Ingredient, ItemToCraft } from '../../../constants/items';
+import { Item } from '../../../constants/items';
 import { hasOwnIngredients } from '../RaidCalculator.helpers';
 
 type ParentIngredient = {
-  data: Ingredient;
+  data: Item;
   amount: number;
 };
 
@@ -11,17 +11,17 @@ export type Result = {
   itemImage: string;
   itemAmount: number;
   ingredients: {
-    data: Ingredient;
+    data: Item;
     amount: number;
   }[];
 };
 
 export const calcResult = (
-  item: ItemToCraft,
+  item: Item,
   itemAmount: number,
   isMixingTableIncluded: boolean
 ) => {
-  const itemCopy: ItemToCraft = JSON.parse(JSON.stringify(item));
+  const itemCopy: Item = JSON.parse(JSON.stringify(item));
   const result = {
     itemName: itemCopy.name,
     itemImage: itemCopy.image,
@@ -60,7 +60,7 @@ export const calcResult = (
 };
 
 export const getAmountAvailialbeToCraft = (
-  item: ItemToCraft,
+  item: Item,
   sulfurAmount: number,
   gunPowderAmount: number
 ) => {
