@@ -16,8 +16,8 @@
 .item {
   position: relative;
   background: var(--dark-bg);
-  width: 6rem;
-  height: 6rem;
+  width: 5.6rem;
+  height: 5.6rem;
   flex-shrink: 0;
 
   & img {
@@ -30,8 +30,8 @@
   }
 
   @include mobileL {
-    width: 5rem;
-    height: 5rem;
+    width: 4.5rem;
+    height: 4.5rem;
   }
 
   @include mobile {

@@ -3,15 +3,17 @@
 .medium-text {
   font-weight: 500;
   color: var(--light-font);
-  @include mobile {
-    font-size: 0.875rem;
-  }
+  font-size: 0.875rem;
 }
 
 .primary-ingredient {
   background: var(--border);
   display: flex;
   padding: 0 2rem;
+}
+
+.margin {
+  margin: 3px 0;
 }
 
 .image {

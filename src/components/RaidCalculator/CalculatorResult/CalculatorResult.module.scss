@@ -3,6 +3,7 @@
 .calculator-result {
   flex: 1.1;
   border: 1px solid var(--border);
+  height: 100%;
   @include tabletS {
     margin-top: 2rem;
   }
@@ -30,7 +31,7 @@
   color: var(--light-font);
 
   &-padding {
-    padding: 1.5rem 2rem;
+    padding: 1rem 2rem;
     font-weight: 500;
     color: var(--light-font);
   }

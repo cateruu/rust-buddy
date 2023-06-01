@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Ingredient } from '../../../../../constants/items';
+import { Item } from '../../../../../constants/items';
 import styles from './NestedIngredients.module.scss';
 import {
   capitalizeName,
@@ -7,7 +7,7 @@ import {
 } from '../../../RaidCalculator.helpers';
 
 type Props = {
-  primaryIngredient: Ingredient;
+  primaryIngredient: Item;
 };
 
 const NestedIngredients = ({ primaryIngredient }: Props) => {
@@ -42,7 +42,9 @@ const NestedIngredients = ({ primaryIngredient }: Props) => {
                   amount,
                 } = ingredient;
                 return (
-                  <div className={styles.ingredient}>
+                  <div
+                    className={`${styles.ingredient} ${styles['child-ingredient']}`}
+                  >
                     <div className={styles.image}>
                       <Image src={image} alt={name} fill />
                     </div>
