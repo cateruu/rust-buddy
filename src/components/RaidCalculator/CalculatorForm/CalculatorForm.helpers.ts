@@ -31,7 +31,7 @@ export const calcResult = (
 
   const { perCraft } = itemCopy;
 
-  if (itemAmount < perCraft) itemAmount = perCraft;
+  itemAmount = Math.ceil(itemAmount / perCraft) * perCraft;
 
   itemCopy.ingredients.forEach((primaryIngredient) => {
     primaryIngredient.amount =
@@ -45,7 +45,8 @@ export const calcResult = (
             childIngredient.amount = 20;
 
           childIngredient.amount =
-            (childIngredient.amount / perCraft) * parentIngredient.amount;
+            Math.ceil(parentIngredient.amount / perCraft) *
+            childIngredient.amount;
 
           if (hasOwnIngredients(childIngredient.data))
             calcNestedIngredients(childIngredient as ParentIngredient);
