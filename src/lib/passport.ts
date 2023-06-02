@@ -9,6 +9,10 @@ export interface SteamUser {
     value: string;
   }[];
   provider: string;
+  _json: {
+    profileurl: string;
+    loccountrycode: string;
+  };
 }
 
 const SteamStrategy = passport_steam.Strategy;
@@ -35,7 +39,7 @@ passport.use(
     ) => {
       const { data, error: selectError } = await supabase
         .from('users')
-        .select('steam_id')
+        .select('id')
         .eq('steam_id', profile.id);
 
       if (selectError) console.error('select user error ->', selectError);
@@ -46,6 +50,8 @@ passport.use(
           .update({
             displayName: profile.displayName,
             photo: profile.photos[0].value,
+            steam_url: profile._json.profileurl,
+            country: profile._json.loccountrycode,
             last_activity: new Date(),
           })
           .eq('steam_id', profile.id);
@@ -56,6 +62,8 @@ passport.use(
           steam_id: profile.id,
           displayName: profile.displayName,
           photo: profile.photos[0].value,
+          steam_url: profile._json.profileurl,
+          country: profile._json.loccountrycode,
           last_activity: new Date(),
         });
         if (error) console.error('create new user error ->', error);

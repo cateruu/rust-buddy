@@ -13,7 +13,7 @@ const UserInfo = () => {
     <div className={styles.container}>
       <div className={styles.imageWrapper}>
         <Image
-          src={user.photos[0].value}
+          src={user.photo}
           alt={`${user.displayName} profile picture`}
           fill
         />

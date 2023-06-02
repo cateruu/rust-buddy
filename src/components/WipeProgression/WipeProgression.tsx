@@ -35,7 +35,7 @@ const WipeProgression = () => {
       const { data, error } = await supabase
         .from('boards')
         .select()
-        .eq('creator', user.id);
+        .eq('creator', user.steamId);
 
       setUserBoards(data);
 
@@ -56,7 +56,7 @@ const WipeProgression = () => {
           event: '*',
           schema: 'public',
           table: 'boards',
-          filter: `creator=eq.${user.id}`,
+          filter: `creator=eq.${user.steamId}`,
         },
         (payload) => {
           if (payload.eventType === 'DELETE') {
@@ -86,7 +86,7 @@ const WipeProgression = () => {
     return () => {
       channel.unsubscribe();
     };
-  }, []);
+  }, [user.steamId]);
 
   return (
     <>
