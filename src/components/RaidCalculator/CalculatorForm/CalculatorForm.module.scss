@@ -1,0 +1,18 @@
+.calculator-form {
+  color: var(--dark-font);
+  flex: 1;
+}
+
+.label {
+  margin-bottom: 1rem;
+}
+
+.submit-btn {
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: none;
+  padding: 1rem 0;
+  width: 100%;
+  background: var(--red);
+}

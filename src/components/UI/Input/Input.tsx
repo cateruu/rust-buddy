@@ -3,8 +3,8 @@ import styles from './Input.module.scss';
 import Image from 'next/image';
 
 interface Props {
-  value: string;
-  onChange: (event: ChangeEvent) => void;
+  value: string | number;
+  onChange: (event: ChangeEvent<HTMLInputElement>, toChange?: string) => void;
   withLabel?: boolean;
   labelText?: string;
   width?: string;
@@ -26,19 +26,19 @@ const Input = ({
   return (
     <div className={styles['input-wrapper']}>
       {withLabel && <p className={styles['input-label']}>{labelText}</p>}
-      <div className={styles['input-container']}>
+      <div className={`${styles['input-container']} ${error && styles.error}`}>
         {icon && (
           <div className={styles.icon}>
-            <Image src={icon} alt={icon} width={35} height={35} />
+            <Image src={icon} alt={icon} width={32} height={32} />
           </div>
         )}
         <input
           type='text'
           placeholder={placeholder}
-          className={`${styles.input} ${error && styles.error}`}
+          className={styles.input}
           value={value}
           onChange={onChange}
-          style={{ minWidth: width ? width : '300px' }}
+          style={{ width: width ? width : '300px' }}
         />
       </div>
       {error && <p className={styles['error-text']}>{error}</p>}

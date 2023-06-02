@@ -1,0 +1,38 @@
+@use '../../../styles/mixins' as *;
+
+.calculator-result {
+  flex: 1.1;
+  border: 1px solid var(--border);
+  height: 100%;
+  @include tabletS {
+    margin-top: 2rem;
+  }
+}
+
+.placeholder-text {
+  color: var(--dark-font);
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.result {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+
+  & span {
+    color: var(--red);
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+}
+
+.medium-text {
+  font-weight: 500;
+  color: var(--light-font);
+
+  &-padding {
+    padding: 1rem 2rem;
+    font-weight: 500;
+    color: var(--light-font);
+  }
+}

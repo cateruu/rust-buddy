@@ -1,0 +1,45 @@
+@use '../../../../styles/mixins' as *;
+
+.items {
+  display: flex;
+  column-gap: 1em;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+}
+
+.label {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--light-font);
+}
+
+.item {
+  position: relative;
+  background: var(--dark-bg);
+  width: 5.6rem;
+  height: 5.6rem;
+  flex-shrink: 0;
+
+  & img {
+    object-fit: contain;
+    padding: 1em;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @include mobileL {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  @include mobile {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.selected {
+  outline: 1px solid var(--light-font);
+}

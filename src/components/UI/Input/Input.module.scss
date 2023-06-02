@@ -13,7 +13,6 @@
   padding: 12px;
   font-size: 14px;
   color: var(--light-font);
-  border: 1px solid var(--dark-bg);
 
   &::placeholder {
     color: var(--dark-font);
@@ -22,11 +21,15 @@
 
 .input-container {
   display: flex;
+  border: 1px solid var(--dark-bg);
 }
 
 .icon {
   background-color: var(--dark-bg);
   padding-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .error {

@@ -12,7 +12,7 @@ interface Props {
   text: string;
   variant: 'primary' | 'secondary';
   onClick: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  width?: number;
+  width?: number | string;
   disabled?: boolean;
   isLoading?: boolean;
 }
