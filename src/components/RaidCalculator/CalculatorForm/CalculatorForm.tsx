@@ -1,6 +1,6 @@
 import ItemsToCraft from './ItemsToCraft/ItemsToCraft';
 import styles from './CalculatorForm.module.scss';
-import { ItemToCraft, itemsToCraft } from '../../../constants/items';
+import { Item, itemsToCraft } from '../../../constants/items';
 import Checkboxes, { CheckboxesData } from './Checkboxes/Checkboxes';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Inputs from './Inputs/Inputs';
@@ -16,9 +16,7 @@ type Props = {
 };
 
 const CalculatorForm = ({ onCalculate }: Props) => {
-  const [selectedItem, setSelectedItem] = useState<ItemToCraft>(
-    itemsToCraft[0]
-  );
+  const [selectedItem, setSelectedItem] = useState<Item>(itemsToCraft[0]);
   const [checkboxesData, setCheckboxesData] = useState({
     selectedCheckbox: 'ITEM_AMOUNT',
     isMixingTableIncluded: false,
@@ -39,7 +37,7 @@ const CalculatorForm = ({ onCalculate }: Props) => {
 
   const isEachInputEmpty = !itemAmount && !sulfurAmount && !gunPowderAmount;
 
-  const itemSelectHandler = (selectedItem: ItemToCraft) =>
+  const itemSelectHandler = (selectedItem: Item) =>
     setSelectedItem(selectedItem);
   const checkboxSelectHandler = (checkboxesData: CheckboxesData) =>
     setCheckboxesData(checkboxesData);

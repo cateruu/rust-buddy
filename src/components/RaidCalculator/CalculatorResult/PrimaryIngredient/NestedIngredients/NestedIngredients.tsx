@@ -44,6 +44,7 @@ const NestedIngredients = ({ primaryIngredient }: Props) => {
                 return (
                   <div
                     className={`${styles.ingredient} ${styles['child-ingredient']}`}
+                    key={ingredient.data.name}
                   >
                     <div className={styles.image}>
                       <Image src={image} alt={name} fill />

@@ -1,15 +1,15 @@
 import Image from 'next/image';
 import styles from './ItemsToCraft.module.scss';
-import { ItemToCraft } from '../../../../constants/items';
+import { Item } from '../../../../constants/items';
 
 type Props = {
-  itemsToCraft: ItemToCraft[];
-  onItemSelect: (selectedItem: ItemToCraft) => void;
-  selectedItem: ItemToCraft;
+  itemsToCraft: Item[];
+  onItemSelect: (selectedItem: Item) => void;
+  selectedItem: Item;
 };
 
 const ItemsToCraft = ({ onItemSelect, selectedItem, itemsToCraft }: Props) => {
-  const setSelectedItemHandler = (selectedItem: ItemToCraft) =>
+  const setSelectedItemHandler = (selectedItem: Item) =>
     onItemSelect(selectedItem);
 
   return (

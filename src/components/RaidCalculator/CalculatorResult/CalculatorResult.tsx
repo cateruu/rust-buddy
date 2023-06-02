@@ -29,7 +29,10 @@ const CalculatorResult = ({ result }: Props) => {
       <div className={styles.ingredients}>
         <div className={styles['medium-text-padding']}>Ingredients:</div>
         {ingredients.map((primaryIngredient) => (
-          <PrimaryIngredient primaryIngredient={primaryIngredient} />
+          <PrimaryIngredient
+            primaryIngredient={primaryIngredient}
+            key={primaryIngredient.data.name}
+          />
         ))}
       </div>
     </div>

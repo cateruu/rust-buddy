@@ -1,11 +1,11 @@
 import { ChangeEvent } from 'react';
 import Input from '../../../UI/Input/Input';
-import { ItemToCraft } from '../../../../constants/items';
+import { Item } from '../../../../constants/items';
 import { capitalizeName } from '../../RaidCalculator.helpers';
 
 type Props = {
   selectedCheckbox: string;
-  selectedItem: ItemToCraft;
+  selectedItem: Item;
   itemAmount: number;
   sulfurAmount: number;
   gunpowderAmount: number;
