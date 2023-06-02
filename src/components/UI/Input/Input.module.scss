@@ -13,7 +13,6 @@
   padding: 12px;
   font-size: 14px;
   color: var(--light-font);
-  border: 1px solid var(--dark-bg);
 
   &::placeholder {
     color: var(--dark-font);
@@ -22,6 +21,7 @@
 
 .input-container {
   display: flex;
+  border: 1px solid var(--dark-bg);
 }
 
 .icon {
@@ -33,7 +33,7 @@
 }
 
 .error {
-  border: 1px solid var(--red);
+  border-color: var(--red);
 }
 
 .error-text {

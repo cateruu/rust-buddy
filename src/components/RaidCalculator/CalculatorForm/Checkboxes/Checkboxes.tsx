@@ -6,10 +6,7 @@ export type CheckboxesData = {
 };
 
 type Props = {
-  onCheckboxSelect: (checkboxesData: {
-    selectedCheckbox: string;
-    isMixingTableIncluded: boolean;
-  }) => void;
+  onCheckboxSelect: (checkboxesData: CheckboxesData) => void;
   checkboxesData: CheckboxesData;
 };
 
