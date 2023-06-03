@@ -9,12 +9,16 @@ type Props = {
 };
 
 const CalculatorResult = ({ result }: Props) => {
-  const { itemName, itemAmount, ingredients } = result;
+  const { itemName, itemAmount, ingredients, selectedCheckbox } = result;
 
   return (
     <div className={styles['calculator-result']}>
       <div className={styles.result}>
-        <div className={styles['medium-text']}>You want to craft:</div>
+        <div className={styles['medium-text']}>
+          {selectedCheckbox === 'RESOURCES_AMOUNT'
+            ? "You're able to craft:"
+            : 'You want to craft:'}
+        </div>
         <span>
           {itemAmount} {`${capitalizeName(itemName)}`}
         </span>

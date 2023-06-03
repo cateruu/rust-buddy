@@ -22,7 +22,7 @@ const CalculatorForm = ({ onCalculate }: Props) => {
     isMixingTableIncluded: false,
   });
 
-  const { selectedCheckbox, isMixingTableIncluded } = checkboxesData;
+  const { selectedCheckbox } = checkboxesData;
 
   const [itemAmount, setItemAmount] = useState(0);
   const [sulfurAmount, setSulfurAmount] = useState(0);
@@ -97,9 +97,26 @@ const CalculatorForm = ({ onCalculate }: Props) => {
     return true;
   };
 
-  const calculateResultHandler = () => {
+  const calcResultHandler = () => {
     if (!areInputsValid()) return;
-    onCalculate(calcResult(selectedItem, itemAmount, isMixingTableIncluded));
+
+    if (selectedCheckbox === 'ITEM_AMOUNT') {
+      onCalculate(calcResult(selectedItem, itemAmount, checkboxesData));
+      return;
+    }
+
+    if (selectedCheckbox === 'RESOURCES_AMOUNT')
+      onCalculate(
+        calcResult(
+          selectedItem,
+          getAmountAvailialbeToCraft(
+            selectedItem,
+            sulfurAmount,
+            gunPowderAmount
+          ),
+          checkboxesData
+        )
+      );
   };
 
   useEffect(() => {
@@ -133,7 +150,7 @@ const CalculatorForm = ({ onCalculate }: Props) => {
       <Button
         text='Calculate'
         variant='primary'
-        onClick={calculateResultHandler}
+        onClick={calcResultHandler}
         width={'100%'}
       />
     </div>
