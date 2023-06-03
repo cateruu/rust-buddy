@@ -1,21 +1,14 @@
 import { Result } from '../CalculatorForm/CalculatorForm.helpers';
 import { capitalizeName } from '../RaidCalculator.helpers';
 import styles from './CalculatorResult.module.scss';
-import PrimaryIngredient from './PrimaryIngredient/PrimaryIngredient';
+import Ingredients from './Ingredients/Ingredients';
+import IngredientItem from './Ingredients/IngredientItem/IngredientItem';
 
 type Props = {
   result: Result;
 };
 
 const CalculatorResult = ({ result }: Props) => {
-  if (!result) {
-    return (
-      <div className={styles['calculator-result']}>
-        <p className={styles['placeholder-text']}>Result will be shown here.</p>
-      </div>
-    );
-  }
-
   const { itemName, itemAmount, ingredients } = result;
 
   return (
@@ -28,11 +21,14 @@ const CalculatorResult = ({ result }: Props) => {
       </div>
       <div className={styles.ingredients}>
         <div className={styles['medium-text-padding']}>Ingredients:</div>
-        {ingredients.map((primaryIngredient) => (
-          <PrimaryIngredient
-            primaryIngredient={primaryIngredient}
-            key={primaryIngredient.data.name}
-          />
+        <Ingredients ingredients={ingredients} />
+      </div>
+      <div className={styles['resources-needed']}>
+        <div className={styles['medium-text-padding']}>
+          Total resources needed:
+        </div>
+        {result.totalResourcesNeeded.map((resource) => (
+          <IngredientItem ingredient={resource} key={resource.data.name} />
         ))}
       </div>
     </div>

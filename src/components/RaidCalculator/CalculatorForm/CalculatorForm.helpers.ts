@@ -1,7 +1,7 @@
 import { Item } from '../../../constants/items';
 import { hasOwnIngredients } from '../RaidCalculator.helpers';
 
-type ParentIngredient = {
+type Ingredient = {
   data: Item;
   amount: number;
 };
@@ -14,6 +14,26 @@ export type Result = {
     data: Item;
     amount: number;
   }[];
+  totalResourcesNeeded: Ingredient[];
+};
+
+const calcTotalResourcesNeeded = (
+  ingredient: Ingredient,
+  array: Ingredient[]
+) => {
+  const isAResource = !hasOwnIngredients(ingredient.data);
+  if (!isAResource) return;
+
+  const resourceIndex = array.findIndex(
+    (resource) => resource.data.name === ingredient.data.name
+  );
+
+  resourceIndex === -1
+    ? array.push({
+        data: ingredient.data,
+        amount: ingredient.amount,
+      })
+    : (array[resourceIndex].amount += ingredient.amount);
 };
 
 export const calcResult = (
@@ -27,9 +47,11 @@ export const calcResult = (
     itemImage: itemCopy.image,
     itemAmount,
     ingredients: itemCopy.ingredients,
+    totalResourcesNeeded: [],
   };
 
   const { perCraft } = itemCopy;
+  const { totalResourcesNeeded } = result;
 
   itemAmount = Math.ceil(itemAmount / perCraft) * perCraft;
 
@@ -37,8 +59,10 @@ export const calcResult = (
     primaryIngredient.amount =
       (primaryIngredient.amount / perCraft) * itemAmount;
 
+    calcTotalResourcesNeeded(primaryIngredient, totalResourcesNeeded);
+
     if (hasOwnIngredients(primaryIngredient.data)) {
-      const calcNestedIngredients = (parentIngredient: ParentIngredient) => {
+      const calcNestedIngredients = (parentIngredient: Ingredient) => {
         const { perCraft } = parentIngredient.data;
         parentIngredient.data.ingredients.forEach((childIngredient) => {
           if (childIngredient.data.name === 'charcoal' && isMixingTableIncluded)
@@ -48,12 +72,13 @@ export const calcResult = (
             Math.ceil(parentIngredient.amount / perCraft) *
             childIngredient.amount;
 
+          calcTotalResourcesNeeded(childIngredient, totalResourcesNeeded);
+
           if (hasOwnIngredients(childIngredient.data))
-            calcNestedIngredients(childIngredient as ParentIngredient);
+            calcNestedIngredients(childIngredient);
         });
       };
-
-      calcNestedIngredients(primaryIngredient as ParentIngredient);
+      calcNestedIngredients(primaryIngredient);
     }
   });
 
