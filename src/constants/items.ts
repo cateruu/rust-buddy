@@ -1,14 +1,16 @@
-export interface Item {
+export type Item = {
   name: string;
   image: string;
-  ingredients?: {
-    data: Item;
-    amount: number;
-  }[];
+  ingredients?: Ingredient[];
   perCraft?: number;
   gunPowderPerCraft?: number;
   sulfurPerCraft?: number;
-}
+};
+
+export type Ingredient = {
+  data: Item;
+  amount: number;
+};
 
 const techTrash = {
   name: 'tech trash',

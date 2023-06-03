@@ -9,12 +9,6 @@
   }
 }
 
-.placeholder-text {
-  color: var(--dark-font);
-  padding: 1.5rem 2rem;
-  border-bottom: 1px solid var(--border);
-}
-
 .result {
   padding: 1.5rem 2rem;
   border-bottom: 1px solid var(--border);
@@ -35,4 +29,9 @@
     font-weight: 500;
     color: var(--light-font);
   }
+}
+
+.resources-needed {
+  padding-bottom: 1rem;
+  border-top: 1px solid var(--border);
 }

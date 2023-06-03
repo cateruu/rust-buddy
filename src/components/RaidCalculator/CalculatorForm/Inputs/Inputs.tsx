@@ -47,7 +47,7 @@ const Inputs = ({
             onChange={(e) => onAmountChange(e, 'SULFUR_AMOUNT')}
             withLabel
             labelText='Sulfur amount:'
-            icon='/item_images/sulfur.png'
+            icon='/item_images/sulfur.webp'
             error={sulfurInputError}
             width='100%'
           />
