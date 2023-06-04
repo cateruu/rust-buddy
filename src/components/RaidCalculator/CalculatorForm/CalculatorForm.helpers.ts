@@ -1,5 +1,6 @@
 import { Item } from '../../../constants/items';
 import { hasOwnIngredients } from '../RaidCalculator.helpers';
+import { CheckboxesData } from './Checkboxes/Checkboxes';
 
 type Ingredient = {
   data: Item;
@@ -15,14 +16,14 @@ export type Result = {
     amount: number;
   }[];
   totalResourcesNeeded: Ingredient[];
+  selectedCheckbox: string;
 };
 
 const calcTotalResourcesNeeded = (
   ingredient: Ingredient,
   array: Ingredient[]
 ) => {
-  const isAResource = !hasOwnIngredients(ingredient.data);
-  if (!isAResource) return;
+  if (hasOwnIngredients(ingredient.data)) return;
 
   const resourceIndex = array.findIndex(
     (resource) => resource.data.name === ingredient.data.name
@@ -39,15 +40,18 @@ const calcTotalResourcesNeeded = (
 export const calcResult = (
   item: Item,
   itemAmount: number,
-  isMixingTableIncluded: boolean
+  checkboxesData: CheckboxesData
 ) => {
   const itemCopy: Item = JSON.parse(JSON.stringify(item));
+  const { selectedCheckbox, isMixingTableIncluded } = checkboxesData;
+
   const result = {
     itemName: itemCopy.name,
     itemImage: itemCopy.image,
     itemAmount,
     ingredients: itemCopy.ingredients,
     totalResourcesNeeded: [],
+    selectedCheckbox,
   };
 
   const { perCraft } = itemCopy;
