@@ -1,10 +1,13 @@
 @use '../../../../styles/mixins' as *;
 
 .items {
-  display: flex;
-  column-gap: 1em;
-  flex-wrap: wrap;
-  row-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+  gap: 0.5rem;
+
+  @include mobile {
+    grid-template-columns: repeat(auto-fit, minmax(3.5rem, 1fr));
+  }
 }
 
 .label {
@@ -14,29 +17,20 @@
 }
 
 .item {
+  aspect-ratio: 1 / 1;
   position: relative;
   background: var(--dark-bg);
-  width: 5.6rem;
-  height: 5.6rem;
+  width: auto;
+  height: auto;
   flex-shrink: 0;
 
   & img {
     object-fit: contain;
-    padding: 1em;
+    padding: 0.825rem;
   }
 
   &:hover {
     cursor: pointer;
-  }
-
-  @include mobileL {
-    width: 4.5rem;
-    height: 4.5rem;
-  }
-
-  @include mobile {
-    width: 4rem;
-    height: 4rem;
   }
 }
 

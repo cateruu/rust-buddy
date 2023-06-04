@@ -115,6 +115,8 @@ const beancanGrenade: Item = {
     },
   ],
   perCraft: 1,
+  gunPowderPerCraft: 60,
+  sulfurPerCraft: 0,
 };
 
 const explosives: Item = {
